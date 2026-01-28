@@ -106,12 +106,8 @@ export function HomePage() {
             <h1 
               className="text-5xl font-extrabold mb-2 tracking-tight"
               style={{ 
-                color: theme.colors.text,
+                color: theme.colors.primary,
                 fontFamily: '"Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.accent || theme.colors.primary} 100%)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
                 letterSpacing: '-0.02em',
               }}
             >
