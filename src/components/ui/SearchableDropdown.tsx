@@ -2,23 +2,23 @@ import { useState, useRef, useEffect } from 'react';
 import type React from 'react';
 import { useTheme } from '../../hooks';
 
-interface SearchableDropdownProps {
-  options: string[];
-  selected: string[];
-  onChange: (selected: string[]) => void;
+interface SearchableDropdownProps<T extends string> {
+  options: T[];
+  selected: T[];
+  onChange: (selected: T[]) => void;
   placeholder: string;
   label: string;
-  renderIcon?: (option: string) => React.ReactNode;
+  renderIcon?: (option: T) => React.ReactNode;
 }
 
-export function SearchableDropdown({
+export function SearchableDropdown<T extends string>({
   options,
   selected,
   onChange,
   placeholder,
   label,
   renderIcon,
-}: SearchableDropdownProps) {
+}: SearchableDropdownProps<T>) {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,7 +42,7 @@ export function SearchableDropdown({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const toggleOption = (option: string) => {
+  const toggleOption = (option: T) => {
     if (selected.includes(option)) {
       onChange(selected.filter(item => item !== option));
     } else {
@@ -51,7 +51,7 @@ export function SearchableDropdown({
     setSearchQuery('');
   };
 
-  const removeOption = (option: string, e: React.MouseEvent) => {
+  const removeOption = (option: T, e: React.MouseEvent) => {
     e.stopPropagation();
     onChange(selected.filter(item => item !== option));
   };
@@ -148,7 +148,6 @@ export function SearchableDropdown({
                   backgroundColor: theme.colors.background,
                   borderColor: theme.colors.border,
                   color: theme.colors.text,
-                  focusRingColor: theme.colors.primary,
                 }}
                 autoFocus
               />

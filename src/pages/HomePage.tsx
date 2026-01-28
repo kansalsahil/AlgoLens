@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useProblem, useTheme } from '../hooks';
 import { DIFFICULTY_COLORS } from '../config';
 import { ThemeSelector } from '../components/ui/ThemeSelector';
-import { ArrayIcon, LinkedListIcon, TreeIcon, getIconForTag } from '../components/ui/DataStructureIcons';
+import { getIconForTag } from '../components/ui/DataStructureIcons';
 import { SearchableDropdown } from '../components/ui/SearchableDropdown';
 import { ProblemTag } from '../core/types';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -56,12 +56,6 @@ export function HomePage() {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedTags]);
-
-  const toggleTag = (tag: ProblemTag) => {
-    setSelectedTags(prev =>
-      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-    );
-  };
 
   const clearFilters = () => {
     setSearchQuery('');
@@ -154,7 +148,6 @@ export function HomePage() {
                 backgroundColor: theme.colors.surface,
                 borderColor: theme.colors.border,
                 color: theme.colors.text,
-                focusRingColor: theme.colors.primary,
               }}
             />
             <svg
