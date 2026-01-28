@@ -175,26 +175,29 @@ export const RecursiveSolution: Solution<BinaryTreeInorderInput, number[]> = {
     traverse(workingRoot, 0);
 
     // Final step
-    const finalVizData = createVisualizationData({
-      id: 'tree',
-      name: 'Binary Tree',
-      root: workingRoot,
-      highlightedNodes: [],
-      traversalPath: [...traversalPath],
-    }, { result: [...result] });
-    finalVizData.annotations = [
-      {
-        text: `✓ Inorder: [${result.join(', ')}]`,
-        position: { x: 50, y: 10 },
-        style: 'success',
-      },
-    ];
     steps.push({
       id: `step-${stepId++}`,
       type: 'return',
       description: 'Return result array',
       lineNumber: 13,
-      visualizationData: finalVizData,
+      visualizationData: {
+        trees: [{
+          id: 'tree',
+          name: 'Binary Tree',
+          root: workingRoot,
+          highlightedNodes: [],
+          traversalPath: [...traversalPath],
+        }],
+        stack: [...callStack],
+        custom: { result: [...result] },
+        annotations: [
+          {
+            text: `✓ Inorder: [${result.join(', ')}]`,
+            position: { x: 50, y: 10 },
+            style: 'success',
+          },
+        ],
+      },
       variables: { result: [...result] },
     });
 

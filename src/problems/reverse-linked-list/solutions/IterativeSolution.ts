@@ -35,9 +35,9 @@ export const IterativeSolution: Solution<ReverseLinkedListInput, ListNode | null
       allNodes.push({
         id: temp.id,
         value: temp.value,
-        next: temp.next,
+        next: temp.next || null,
       });
-      temp = temp.next;
+      temp = temp.next || null;
     }
 
     if (allNodes.length === 0) {

@@ -1,4 +1,4 @@
-import { ListNode } from '../../core/types';
+import { ListNode, ProblemTag } from '../../core/types';
 
 // Helper to create linked list from array
 function createLinkedList(values: number[]): ListNode | null {
@@ -19,7 +19,7 @@ export const REVERSE_LINKED_LIST_METADATA = {
   id: 'reverse-linked-list',
   title: '206. Reverse Linked List',
   difficulty: 'easy' as const,
-  tags: ['Linked List', 'Recursive', 'Iterative'] as const,
+  tags: ['Linked List', 'Recursive', 'Iterative'] as ProblemTag[],
   category: 'Linked List', // Deprecated, kept for backward compatibility
   description: `Given the head of a singly linked list, reverse the list, and return the reversed list.`,
   examples: [

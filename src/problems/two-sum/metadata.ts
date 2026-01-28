@@ -1,8 +1,10 @@
+import { ProblemTag } from '../../core/types';
+
 export const TWO_SUM_METADATA = {
   id: 'two-sum',
   title: '1. Two Sum',
   difficulty: 'easy' as const,
-  tags: ['Array', 'Hash Map', 'Iterative'] as const,
+  tags: ['Array', 'Hash Map', 'Iterative'] as ProblemTag[],
   category: 'Array', // Deprecated, kept for backward compatibility
   description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 

@@ -32,9 +32,9 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
       allNodes.push({
         id: temp.id,
         value: temp.value,
-        next: temp.next,
+        next: temp.next || null,
       });
-      temp = temp.next;
+      temp = temp.next || null;
     }
 
     if (allNodes.length === 0) {
@@ -68,8 +68,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
 
     // Helper to create visualization with current pointer state
     const createVisualization = (
-      currentNodeIdx: number | null,
-      nextNodeIdx: number | null,
       highlightedIndices: number[] = [],
       pointerLabels: { name: string; idx: number; color: string }[] = []
     ) => {
@@ -123,8 +121,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
           description: `Base case: reached tail node (${node.value}), this becomes new head`,
           lineNumber: 2,
           visualizationData: createVisualization(
-            nodeIdx,
-            null,
             [nodeIdx],
             [{ name: 'head', idx: nodeIdx, color: '#10b981' }]
           ),
@@ -141,8 +137,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
         description: `Call reverseList(${allNodes[nextIdx].value}) - recursing deeper`,
         lineNumber: 6,
         visualizationData: createVisualization(
-          nodeIdx,
-          nextIdx,
           [nodeIdx, nextIdx],
           [
             { name: 'head', idx: nodeIdx, color: '#ef4444' },
@@ -161,8 +155,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
         description: `Returned from recursion. Reverse: ${allNodes[nextIdx].value}.next = ${node.value}`,
         lineNumber: 7,
         visualizationData: createVisualization(
-          nodeIdx,
-          nextIdx,
           [nodeIdx, nextIdx],
           [
             { name: 'head', idx: nodeIdx, color: '#ef4444' },
@@ -181,8 +173,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
         description: `Pointer reversed! Now set ${node.value}.next = null`,
         lineNumber: 8,
         visualizationData: createVisualization(
-          nodeIdx,
-          nextIdx,
           [nodeIdx],
           [
             { name: 'head', idx: nodeIdx, color: '#ef4444' },
@@ -200,8 +190,6 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
         description: `Done with ${node.value}, returning newHead`,
         lineNumber: 10,
         visualizationData: createVisualization(
-          nodeIdx,
-          null,
           [],
           []
         ),

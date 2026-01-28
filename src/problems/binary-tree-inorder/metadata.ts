@@ -1,4 +1,4 @@
-import { TreeNode } from '../../core/types';
+import { TreeNode, ProblemTag } from '../../core/types';
 
 // Helper to create tree from array (level-order)
 function createTree(values: (number | null)[]): TreeNode | null {
@@ -31,7 +31,7 @@ export const BINARY_TREE_INORDER_METADATA = {
   id: 'binary-tree-inorder',
   title: '94. Binary Tree Inorder Traversal',
   difficulty: 'easy' as const,
-  tags: ['Tree', 'Recursive', 'Iterative'] as const,
+  tags: ['Tree', 'Recursive', 'Iterative'] as ProblemTag[],
   category: 'Tree', // Deprecated, kept for backward compatibility
   description: `Given the root of a binary tree, return the inorder traversal of its nodes' values.
 
