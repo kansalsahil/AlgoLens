@@ -5,7 +5,7 @@ import { HomePage, ProblemPage, AboutPage } from './pages';
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/AlgoLens">
         <AnimationProvider>
           <ProblemProvider>
             <Routes>
