@@ -2,7 +2,8 @@ import { ProblemTag } from '../../core/types';
 
 export const TWO_SUM_METADATA = {
   id: 'two-sum',
-  title: '1. Two Sum',
+  title: 'Two Sum',
+  leetcodeNumber: 1,
   difficulty: 'easy' as const,
   tags: ['Array', 'Hash Map', 'Iterative'] as ProblemTag[],
   category: 'Array', // Deprecated, kept for backward compatibility

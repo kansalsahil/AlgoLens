@@ -2,3 +2,5 @@
 import './two-sum';
 import './reverse-linked-list';
 import './binary-tree-inorder';
+import './contains-duplicate';
+import './valid-anagram';

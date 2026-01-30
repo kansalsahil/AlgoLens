@@ -1,5 +1,5 @@
 import { VisualizationProps } from '../../../core/types';
-import { ArrayVisualizer } from '../../../components/primitives';
+import { ArrayAdapter } from '../../../core/adapters';
 import { useTheme } from '../../../hooks';
 
 export function TwoSumVisualizer({ step, transitionDuration }: VisualizationProps) {
@@ -27,8 +27,8 @@ export function TwoSumVisualizer({ step, transitionDuration }: VisualizationProp
 
   return (
     <div className="space-y-8">
-      {/* Array Visualization */}
-      <ArrayVisualizer array={array} transitionDuration={transitionDuration} />
+      {/* Array Visualization - Using ArrayAdapter */}
+      <ArrayAdapter array={array} transitionDuration={transitionDuration} />
 
       {/* Info Panel */}
       <div

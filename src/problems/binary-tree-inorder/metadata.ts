@@ -29,7 +29,8 @@ function createTree(values: (number | null)[]): TreeNode | null {
 
 export const BINARY_TREE_INORDER_METADATA = {
   id: 'binary-tree-inorder',
-  title: '94. Binary Tree Inorder Traversal',
+  title: 'Binary Tree Inorder Traversal',
+  leetcodeNumber: 94,
   difficulty: 'easy' as const,
   tags: ['Tree', 'Recursive', 'Iterative'] as ProblemTag[],
   category: 'Tree', // Deprecated, kept for backward compatibility

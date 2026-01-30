@@ -1,5 +1,5 @@
 import { VisualizationProps } from '../../../core/types';
-import { TreeVisualizer, StackVisualizer } from '../../../components/primitives';
+import { TreeAdapter, StackAdapter } from '../../../core/adapters';
 import { useTheme } from '../../../hooks';
 
 export function TreeTraversalVisualizer({ step, transitionDuration }: VisualizationProps) {
@@ -20,15 +20,17 @@ export function TreeTraversalVisualizer({ step, transitionDuration }: Visualizat
     <div className="space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <TreeVisualizer tree={tree} transitionDuration={transitionDuration} />
+          <TreeAdapter tree={tree} transitionDuration={transitionDuration} />
         </div>
-        
+
         {stack && stack.length > 0 && (
           <div>
-            <StackVisualizer 
-              stack={stack} 
+            <StackAdapter
+              stack={stack}
               transitionDuration={transitionDuration}
-              title={isRecursive ? 'Call Stack' : 'Stack'}
+              config={{
+                title: isRecursive ? 'Call Stack' : 'Stack'
+              }}
             />
           </div>
         )}

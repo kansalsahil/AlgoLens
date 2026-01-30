@@ -23,6 +23,7 @@ export type ProblemTag =
 export interface Problem<TInput = any, TOutput = any> {
   id: string;
   title: string;
+  leetcodeNumber?: number;
   difficulty: 'easy' | 'medium' | 'hard';
   tags: ProblemTag[];
   description: string;
@@ -39,3 +40,6 @@ export interface ProblemExample {
   output: any;
   explanation?: string;
 }
+
+// Type alias for problem metadata (without solutions and visualizer)
+export type ProblemMetadata = Omit<Problem, 'solutions' | 'defaultVisualizerComponent'>;

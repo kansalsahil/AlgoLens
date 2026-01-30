@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { VisualizationProps, ListNode } from '../../../core/types';
-import { StackVisualizer } from '../../../components/primitives';
+import { StackAdapter } from '../../../core/adapters';
 import { useTheme } from '../../../hooks';
 
 export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: VisualizationProps) {
@@ -62,7 +62,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="text-xs font-bold px-2 py-1 rounded"
-                          style={{ 
+                          style={{
                             backgroundColor: '#f59e0b',
                             color: '#ffffff'
                           }}
@@ -75,7 +75,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="text-xs font-bold px-2 py-1 rounded"
-                          style={{ 
+                          style={{
                             backgroundColor: '#ef4444',
                             color: '#ffffff'
                           }}
@@ -88,7 +88,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="text-xs font-bold px-2 py-1 rounded"
-                          style={{ 
+                          style={{
                             backgroundColor: '#10b981',
                             color: '#ffffff'
                           }}
@@ -113,8 +113,8 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
                       className="w-16 h-16 flex items-center justify-center rounded-lg transition-all"
                       style={{
                         backgroundColor: isHighlighted ? colors.highlightBg : colors.background,
-                        border: isHighlighted 
-                          ? `3px solid ${colors.highlightBorder}` 
+                        border: isHighlighted
+                          ? `3px solid ${colors.highlightBorder}`
                           : `2px solid ${colors.border}`,
                       }}
                     >
@@ -128,9 +128,9 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
 
                     {/* Arrow showing where this node's next pointer points */}
                     {node.next !== null && (
-                      <svg 
+                      <svg
                         className="absolute top-[50px]"
-                        style={{ 
+                        style={{
                           left: '50%',
                           width: '100px',
                           height: '80px',
@@ -149,13 +149,13 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
                             <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" />
                           </marker>
                         </defs>
-                        
+
                         {/* Calculate arrow direction */}
                         {(() => {
                           const targetIndex = allNodes.findIndex(n => n.id === node.next?.id);
                           const direction = targetIndex > index ? 'forward' : 'back';
                           const distance = Math.abs(targetIndex - index);
-                          
+
                           if (direction === 'forward') {
                             // Arrow pointing right
                             const arrowLength = distance * 80 + 16;
@@ -235,16 +235,18 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
           </div>
             </div>
 
-                    {/* Stack Visualizer */}
-                    {stack && stack.length > 0 && (
-                      <div>
-                        <StackVisualizer 
-                          stack={stack} 
-                          transitionDuration={transitionDuration}
-                          title="Call Stack"
-                        />
-                      </div>
-                    )}
+            {/* Stack Visualizer - Using StackAdapter */}
+            {stack && stack.length > 0 && (
+              <div>
+                <StackAdapter
+                  stack={stack}
+                  transitionDuration={transitionDuration}
+                  config={{
+                    title: 'Call Stack'
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -260,7 +262,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
             >
               {linkedList.name}
             </motion.h3>
-            
+
             {/* Simple node display */}
             <div className="flex items-center gap-4">
               {(() => {
@@ -291,10 +293,13 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
               })()}
             </div>
           </div>
-          
+
           {stack && stack.length > 0 && (
             <div>
-              <StackVisualizer stack={stack} transitionDuration={transitionDuration} />
+              <StackAdapter
+                stack={stack}
+                transitionDuration={transitionDuration}
+              />
             </div>
           )}
         </div>
@@ -304,7 +309,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
       {showPointers && (
         <div
           className="rounded-lg shadow-md p-6 max-w-2xl mx-auto"
-          style={{ 
+          style={{
             backgroundColor: theme.colors.surface,
             border: `1px solid ${theme.colors.border}`
           }}
@@ -317,9 +322,9 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
               <div className="text-xs font-medium" style={{ color: theme.colors.textSecondary }}>
                 prev
               </div>
-              <div 
+              <div
                 className="text-lg font-mono font-semibold px-3 py-2 rounded"
-                style={{ 
+                style={{
                   backgroundColor: theme.colors.background,
                   color: theme.colors.linkedList.primary,
                 }}
@@ -331,9 +336,9 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
               <div className="text-xs font-medium" style={{ color: theme.colors.textSecondary }}>
                 curr
               </div>
-              <div 
+              <div
                 className="text-lg font-mono font-semibold px-3 py-2 rounded"
-                style={{ 
+                style={{
                   backgroundColor: theme.colors.background,
                   color: theme.colors.linkedList.primary,
                 }}
@@ -345,9 +350,9 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
               <div className="text-xs font-medium" style={{ color: theme.colors.textSecondary }}>
                 next
               </div>
-              <div 
+              <div
                 className="text-lg font-mono font-semibold px-3 py-2 rounded"
-                style={{ 
+                style={{
                   backgroundColor: theme.colors.background,
                   color: theme.colors.linkedList.primary,
                 }}

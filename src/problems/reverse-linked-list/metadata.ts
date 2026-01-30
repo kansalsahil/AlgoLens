@@ -17,7 +17,8 @@ function createLinkedList(values: number[]): ListNode | null {
 
 export const REVERSE_LINKED_LIST_METADATA = {
   id: 'reverse-linked-list',
-  title: '206. Reverse Linked List',
+  title: 'Reverse Linked List',
+  leetcodeNumber: 206,
   difficulty: 'easy' as const,
   tags: ['Linked List', 'Recursive', 'Iterative'] as ProblemTag[],
   category: 'Linked List', // Deprecated, kept for backward compatibility
