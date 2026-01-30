@@ -30,10 +30,11 @@ export function ProblemDescription({ problem }: ProblemDescriptionProps) {
         {problem.examples.map((example, index) => (
           <div
             key={index}
-            className="p-4 rounded-md space-y-2"
+            className="p-4 rounded-lg space-y-2 transition-all duration-200 hover:shadow-lg"
             style={{
               backgroundColor: theme.colors.surface,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: `0 2px 8px ${theme.colors.border}40`,
             }}
           >
             <div>

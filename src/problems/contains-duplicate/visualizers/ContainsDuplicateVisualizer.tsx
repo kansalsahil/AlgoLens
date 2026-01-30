@@ -37,10 +37,11 @@ export function ContainsDuplicateVisualizer({ step, transitionDuration }: Visual
 
       {/* Info Panel */}
       <div
-        className="rounded-md shadow-md p-6 space-y-4 max-w-2xl mx-auto"
+        className="rounded-xl shadow-md p-6 space-y-4 max-w-2xl mx-auto"
         style={{
           backgroundColor: theme.colors.surface,
-          border: `1px solid ${theme.colors.border}`,
+          border: `2px solid ${theme.colors.border}`,
+          boxShadow: `0 4px 16px ${theme.colors.border}40, inset 0 1px 2px ${theme.colors.surface}`,
         }}
       >
         <div className="grid grid-cols-2 gap-4">
@@ -84,12 +85,13 @@ export function ContainsDuplicateVisualizer({ step, transitionDuration }: Visual
 
                   <div className="col-span-2 space-y-1">
                     <div
-                      className="rounded-md p-3"
+                      className="rounded-lg p-3"
                       style={{
                         backgroundColor: isMatch
                           ? theme.colors.success + '20'
                           : theme.colors.error + '20',
-                        border: `1px solid ${isMatch ? theme.colors.success : theme.colors.error}`,
+                        border: `2px solid ${isMatch ? theme.colors.success : theme.colors.error}`,
+                        boxShadow: `0 2px 8px ${isMatch ? theme.colors.success : theme.colors.error}30`,
                       }}
                     >
                       <div
@@ -113,10 +115,10 @@ export function ContainsDuplicateVisualizer({ step, transitionDuration }: Visual
                   Seen Set
                 </div>
                 <div
-                  className="rounded-md p-3 min-h-[60px] flex flex-wrap gap-2 items-center"
+                  className="rounded-lg p-3 min-h-[60px] flex flex-wrap gap-2 items-center"
                   style={{
                     backgroundColor: theme.colors.background,
-                    border: `1px solid ${theme.colors.border}`,
+                    border: `2px solid ${theme.colors.border}`,
                   }}
                 >
                   {set.length === 0 ? (

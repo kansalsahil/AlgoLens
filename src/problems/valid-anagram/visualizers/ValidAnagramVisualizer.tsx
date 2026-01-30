@@ -45,10 +45,11 @@ export function ValidAnagramVisualizer({ step, transitionDuration }: Visualizati
 
       {/* Info Panel */}
       <div
-        className="rounded-md shadow-md p-6 space-y-4 max-w-2xl mx-auto"
+        className="rounded-xl shadow-md p-6 space-y-4 max-w-2xl mx-auto"
         style={{
           backgroundColor: theme.colors.surface,
-          border: `1px solid ${theme.colors.border}`,
+          border: `2px solid ${theme.colors.border}`,
+          boxShadow: `0 4px 16px ${theme.colors.border}40, inset 0 1px 2px ${theme.colors.surface}`,
         }}
       >
         <div className="grid grid-cols-2 gap-4">
@@ -85,9 +86,10 @@ export function ValidAnagramVisualizer({ step, transitionDuration }: Visualizati
           )}
 
           {lengthMismatch && (
-            <div className="col-span-2 rounded-md p-3" style={{
+            <div className="col-span-2 rounded-lg p-3" style={{
               backgroundColor: theme.colors.error + '20',
-              border: `1px solid ${theme.colors.error}`,
+              border: `2px solid ${theme.colors.error}`,
+              boxShadow: `0 2px 8px ${theme.colors.error}30`,
             }}>
               <div className="text-sm font-medium" style={{ color: theme.colors.error }}>
                 ✗ Length mismatch - cannot be anagrams
@@ -161,9 +163,10 @@ export function ValidAnagramVisualizer({ step, transitionDuration }: Visualizati
               )}
 
               {notFound && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.error + '20',
-                  border: `1px solid ${theme.colors.error}`,
+                  border: `2px solid ${theme.colors.error}`,
+                  boxShadow: `0 2px 8px ${theme.colors.error}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.error }}>
                     ✗ Character '{currentChar}' not found in map
@@ -177,10 +180,10 @@ export function ValidAnagramVisualizer({ step, transitionDuration }: Visualizati
                   Character Frequency Map
                 </div>
                 <div
-                  className="rounded-md p-3 min-h-[80px]"
+                  className="rounded-lg p-3 min-h-[80px]"
                   style={{
                     backgroundColor: theme.colors.background,
-                    border: `1px solid ${theme.colors.border}`,
+                    border: `2px solid ${theme.colors.border}`,
                   }}
                 >
                   {Object.keys(map).length === 0 ? (

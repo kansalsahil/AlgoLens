@@ -86,28 +86,34 @@ export function ProblemPage() {
     <div className="h-screen flex flex-col" style={{ backgroundColor: theme.colors.background }}>
       {/* Header with back button */}
       <div
-        className="px-4 py-3 flex items-center justify-between shadow-sm"
+        className="px-4 py-3 flex items-center justify-between"
         style={{
           backgroundColor: theme.colors.surface,
-          borderBottom: `2px solid ${theme.colors.border}`,
+          borderBottom: `3px solid ${theme.colors.primary}30`,
+          boxShadow: `0 4px 12px ${theme.colors.border}40`,
         }}
       >
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate('/')}
-            className="px-3 py-1 rounded transition-colors"
+            className="px-3 py-1 rounded-lg transition-all duration-200 hover:scale-105"
             style={{
               backgroundColor: theme.colors.background,
               color: theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: `0 2px 6px ${theme.colors.border}40`,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = theme.colors.primary;
               e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.borderColor = theme.colors.primary;
+              e.currentTarget.style.boxShadow = `0 4px 12px ${theme.colors.primary}40`;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = theme.colors.background;
               e.currentTarget.style.color = theme.colors.text;
+              e.currentTarget.style.borderColor = theme.colors.border;
+              e.currentTarget.style.boxShadow = `0 2px 6px ${theme.colors.border}40`;
             }}
           >
             ← Back
@@ -122,19 +128,24 @@ export function ProblemPage() {
           {!showLeftPanel && (
             <button
               onClick={() => setShowLeftPanel(true)}
-              className="px-3 py-1 rounded transition-colors text-sm"
+              className="px-3 py-1 rounded-lg transition-all duration-200 hover:scale-105 text-sm"
               style={{
                 backgroundColor: theme.colors.background,
                 color: theme.colors.text,
-                border: `1px solid ${theme.colors.border}`,
+                border: `2px solid ${theme.colors.border}`,
+                boxShadow: `0 2px 6px ${theme.colors.border}40`,
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = theme.colors.primary;
                 e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = theme.colors.primary;
+                e.currentTarget.style.boxShadow = `0 4px 12px ${theme.colors.primary}40`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = theme.colors.background;
                 e.currentTarget.style.color = theme.colors.text;
+                e.currentTarget.style.borderColor = theme.colors.border;
+                e.currentTarget.style.boxShadow = `0 2px 6px ${theme.colors.border}40`;
               }}
             >
               Show Description
@@ -143,19 +154,24 @@ export function ProblemPage() {
           {!showRightPanel && (
             <button
               onClick={() => setShowRightPanel(true)}
-              className="px-3 py-1 rounded transition-colors text-sm"
+              className="px-3 py-1 rounded-lg transition-all duration-200 hover:scale-105 text-sm"
               style={{
                 backgroundColor: theme.colors.background,
                 color: theme.colors.text,
-                border: `1px solid ${theme.colors.border}`,
+                border: `2px solid ${theme.colors.border}`,
+                boxShadow: `0 2px 6px ${theme.colors.border}40`,
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = theme.colors.primary;
                 e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = theme.colors.primary;
+                e.currentTarget.style.boxShadow = `0 4px 12px ${theme.colors.primary}40`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = theme.colors.background;
                 e.currentTarget.style.color = theme.colors.text;
+                e.currentTarget.style.borderColor = theme.colors.border;
+                e.currentTarget.style.boxShadow = `0 2px 6px ${theme.colors.border}40`;
               }}
             >
               Show Code
@@ -171,7 +187,11 @@ export function ProblemPage() {
           <ResizablePanel defaultWidth={400} minWidth={300} maxWidth={600} side="left">
             <div
               className="h-full overflow-y-auto relative"
-              style={{ backgroundColor: theme.colors.surface }}
+              style={{
+                backgroundColor: theme.colors.surface,
+                borderRight: `3px solid ${theme.colors.border}`,
+                boxShadow: `4px 0 12px ${theme.colors.border}30`,
+              }}
             >
               <button
                 onClick={() => setShowLeftPanel(false)}
@@ -237,11 +257,18 @@ export function ProblemPage() {
           <ResizablePanel defaultWidth={450} minWidth={300} maxWidth={700} side="right">
             <div
               className="h-full flex flex-col overflow-hidden"
-              style={{ backgroundColor: theme.colors.surface }}
+              style={{
+                backgroundColor: theme.colors.surface,
+                borderLeft: `3px solid ${theme.colors.border}`,
+                boxShadow: `-4px 0 12px ${theme.colors.border}30`,
+              }}
             >
               <div
                 className="flex-shrink-0 relative"
-                style={{ borderBottom: `1px solid ${theme.colors.border}` }}
+                style={{
+                  borderBottom: `2px solid ${theme.colors.border}`,
+                  boxShadow: `0 2px 8px ${theme.colors.border}30`,
+                }}
               >
                 <button
                   onClick={() => setShowRightPanel(false)}

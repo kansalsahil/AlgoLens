@@ -56,10 +56,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               Anagram Groups Map ({Object.keys(map).length} key{Object.keys(map).length > 1 ? 's' : ''})
             </div>
             <div
-              className="rounded-md p-4 space-y-2 max-h-96 overflow-y-auto"
+              className="rounded-lg p-4 space-y-2 max-h-96 overflow-y-auto"
               style={{
                 backgroundColor: theme.colors.surface,
-                border: `1px solid ${theme.colors.border}`,
+                border: `2px solid ${theme.colors.border}`,
               }}
             >
               {Object.entries(map).map(([key, value]: [string, any]) => {
@@ -115,10 +115,11 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
 
       {/* Info Panel */}
       <div
-        className="rounded-md shadow-md p-6 space-y-4 max-w-3xl mx-auto"
+        className="rounded-xl shadow-md p-6 space-y-4 max-w-3xl mx-auto"
         style={{
           backgroundColor: theme.colors.surface,
-          border: `1px solid ${theme.colors.border}`,
+          border: `2px solid ${theme.colors.border}`,
+          boxShadow: `0 4px 16px ${theme.colors.border}40, inset 0 1px 2px ${theme.colors.surface}`,
         }}
       >
         <div className="grid grid-cols-2 gap-4">
@@ -169,12 +170,13 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
                     Comparing Sorted Strings
                   </div>
                   <div
-                    className="text-lg font-semibold p-2 rounded"
+                    className="text-lg font-semibold p-2 rounded-lg"
                     style={{
                       backgroundColor: isAnagram
                         ? theme.colors.success + '20'
                         : theme.colors.error + '20',
-                      border: `1px solid ${isAnagram ? theme.colors.success : theme.colors.error}`,
+                      border: `2px solid ${isAnagram ? theme.colors.success : theme.colors.error}`,
+                      boxShadow: `0 2px 8px ${isAnagram ? theme.colors.success : theme.colors.error}30`,
                       color: isAnagram ? theme.colors.success : theme.colors.error,
                     }}
                   >
@@ -184,9 +186,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               )}
 
               {skipped && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.textSecondary + '20',
-                  border: `1px solid ${theme.colors.textSecondary}`,
+                  border: `2px solid ${theme.colors.textSecondary}`,
+                  boxShadow: `0 2px 8px ${theme.colors.textSecondary}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
                     Already grouped - skipping
@@ -195,9 +198,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               )}
 
               {groupCompleted && completedGroup && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ Group completed: [{completedGroup.map((s: string) => `"${s}"`).join(', ')}]
@@ -233,11 +237,12 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               )}
 
               {exists !== undefined && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: exists
                     ? theme.colors.primary + '20'
                     : theme.colors.success + '20',
-                  border: `1px solid ${exists ? theme.colors.primary : theme.colors.success}`,
+                  border: `2px solid ${exists ? theme.colors.primary : theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${exists ? theme.colors.primary : theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{
                     color: exists ? theme.colors.primary : theme.colors.success
@@ -248,9 +253,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               )}
 
               {newKey && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ New group created for key "{sortedKey}"
@@ -259,9 +265,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
               )}
 
               {added && groupSize !== undefined && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ Added to group (size: {groupSize})
@@ -278,10 +285,10 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
                 Completed Groups ({groups.length})
               </div>
               <div
-                className="rounded-md p-3 space-y-2 max-h-48 overflow-y-auto"
+                className="rounded-lg p-3 space-y-2 max-h-48 overflow-y-auto"
                 style={{
                   backgroundColor: theme.colors.background,
-                  border: `1px solid ${theme.colors.border}`,
+                  border: `2px solid ${theme.colors.border}`,
                 }}
               >
                 {groups.map((group: string[], idx: number) => (
@@ -320,10 +327,11 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
                 Result
               </div>
               <div
-                className="text-lg font-bold p-3 rounded"
+                className="text-lg font-bold p-3 rounded-lg"
                 style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                   color: theme.colors.success,
                 }}
               >

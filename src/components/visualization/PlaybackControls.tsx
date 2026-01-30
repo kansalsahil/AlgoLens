@@ -42,11 +42,12 @@ export function PlaybackControls() {
         {/* Current Step Description */}
         {steps.length > 0 && (
           <div
-            className="text-center text-sm font-medium py-2 px-4 rounded-md"
+            className="text-center text-sm font-medium py-3 px-4 rounded-lg"
             style={{
               color: theme.colors.text,
               backgroundColor: theme.colors.background,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.primary}40`,
+              boxShadow: `0 2px 12px ${theme.colors.primary}20, inset 0 1px 2px ${theme.colors.background}`,
             }}
           >
             {steps[currentStepIndex]?.description || 'No description'}
@@ -79,11 +80,12 @@ export function PlaybackControls() {
           <button
             onClick={reset}
             disabled={steps.length === 0}
-            className="px-3 py-2 rounded-md transition-colors"
+            className="px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
             style={{
               backgroundColor: steps.length === 0 ? theme.colors.border : theme.colors.background,
               color: steps.length === 0 ? theme.colors.textSecondary : theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: steps.length === 0 ? 'none' : `0 2px 6px ${theme.colors.border}40`,
             }}
             title="Reset"
           >
@@ -94,11 +96,12 @@ export function PlaybackControls() {
           <button
             onClick={stepBackward}
             disabled={steps.length === 0 || currentStepIndex === 0}
-            className="px-3 py-2 rounded-md transition-colors"
+            className="px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
             style={{
               backgroundColor: (steps.length === 0 || currentStepIndex === 0) ? theme.colors.border : theme.colors.background,
               color: (steps.length === 0 || currentStepIndex === 0) ? theme.colors.textSecondary : theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: (steps.length === 0 || currentStepIndex === 0) ? 'none' : `0 2px 6px ${theme.colors.border}40`,
             }}
             title="Step Backward"
           >
@@ -109,10 +112,12 @@ export function PlaybackControls() {
           <button
             onClick={isPlaying ? pause : play}
             disabled={steps.length === 0}
-            className="px-6 py-2 rounded-md transition-colors font-medium"
+            className="px-6 py-2 rounded-lg transition-all duration-200 hover:scale-105 font-medium"
             style={{
               backgroundColor: steps.length === 0 ? theme.colors.border : theme.colors.primary,
               color: '#ffffff',
+              border: `2px solid ${steps.length === 0 ? theme.colors.border : theme.colors.primary}`,
+              boxShadow: steps.length === 0 ? 'none' : `0 4px 12px ${theme.colors.primary}40`,
             }}
             title={isPlaying ? 'Pause' : 'Play'}
           >
@@ -123,11 +128,12 @@ export function PlaybackControls() {
           <button
             onClick={stepForward}
             disabled={steps.length === 0 || currentStepIndex >= steps.length - 1}
-            className="px-3 py-2 rounded-md transition-colors"
+            className="px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
             style={{
               backgroundColor: (steps.length === 0 || currentStepIndex >= steps.length - 1) ? theme.colors.border : theme.colors.background,
               color: (steps.length === 0 || currentStepIndex >= steps.length - 1) ? theme.colors.textSecondary : theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: (steps.length === 0 || currentStepIndex >= steps.length - 1) ? 'none' : `0 2px 6px ${theme.colors.border}40`,
             }}
             title="Step Forward"
           >
@@ -137,11 +143,12 @@ export function PlaybackControls() {
           {/* Sound Toggle */}
           <button
             onClick={toggleSound}
-            className="px-3 py-2 rounded-md transition-colors flex items-center gap-1.5"
+            className="px-3 py-2 rounded-lg transition-all duration-200 hover:scale-105 flex items-center gap-1.5"
             style={{
               backgroundColor: soundEnabled ? theme.colors.primary : theme.colors.background,
               color: soundEnabled ? '#ffffff' : theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${soundEnabled ? theme.colors.primary : theme.colors.border}`,
+              boxShadow: soundEnabled ? `0 4px 12px ${theme.colors.primary}40` : `0 2px 6px ${theme.colors.border}40`,
             }}
             title={soundEnabled ? 'Sound On' : 'Sound Off'}
           >
@@ -175,11 +182,12 @@ export function PlaybackControls() {
             value={speed}
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
             disabled={steps.length === 0}
-            className="px-3 py-2 rounded-md transition-colors cursor-pointer"
+            className="px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer hover:shadow-lg"
             style={{
               backgroundColor: theme.colors.background,
               color: theme.colors.text,
-              border: `1px solid ${theme.colors.border}`,
+              border: `2px solid ${theme.colors.border}`,
+              boxShadow: `0 2px 6px ${theme.colors.border}40`,
             }}
           >
             {SPEED_OPTIONS.map(option => (

@@ -73,11 +73,12 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               />
             ) : (
               <div
-                className="text-center p-8 rounded-lg"
+                className="text-center p-8 rounded-xl"
                 style={{
                   backgroundColor: theme.colors.surface,
-                  border: `2px dashed ${theme.colors.border}`,
+                  border: `3px dashed ${theme.colors.border}`,
                   color: theme.colors.textSecondary,
+                  boxShadow: `inset 0 2px 8px ${theme.colors.border}20`,
                 }}
               >
                 <div className="text-lg font-semibold">Empty Stack</div>
@@ -90,10 +91,11 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
 
       {/* Info Panel */}
       <div
-        className="rounded-md shadow-md p-6 space-y-4 max-w-2xl mx-auto"
+        className="rounded-xl p-6 space-y-4 max-w-2xl mx-auto"
         style={{
           backgroundColor: theme.colors.surface,
-          border: `1px solid ${theme.colors.border}`,
+          border: `2px solid ${theme.colors.border}`,
+          boxShadow: `0 4px 16px ${theme.colors.border}40, inset 0 1px 2px ${theme.colors.surface}`,
         }}
       >
         <div className="grid grid-cols-2 gap-4">
@@ -158,9 +160,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {pairFound && removing && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ Found "{pairFound}" at index {pairIndex} - removing
@@ -180,9 +183,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {noPairFound && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.error + '20',
-                  border: `1px solid ${theme.colors.error}`,
+                  border: `2px solid ${theme.colors.error}`,
+                  boxShadow: `0 2px 8px ${theme.colors.error}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.error }}>
                     ✗ No valid pairs found - Invalid brackets
@@ -191,9 +195,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {allMatched && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ All brackets matched - String is empty
@@ -253,11 +258,12 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
                   </div>
 
                   {stackTop !== undefined && (
-                    <div className="col-span-2 rounded-md p-3" style={{
+                    <div className="col-span-2 rounded-lg p-3" style={{
                       backgroundColor: matches
                         ? theme.colors.success + '20'
                         : theme.colors.error + '20',
-                      border: `1px solid ${matches ? theme.colors.success : theme.colors.error}`,
+                      border: `2px solid ${matches ? theme.colors.success : theme.colors.error}`,
+                      boxShadow: `0 2px 8px ${matches ? theme.colors.success : theme.colors.error}30`,
                     }}>
                       <div className="text-sm font-medium" style={{
                         color: matches ? theme.colors.success : theme.colors.error
@@ -274,9 +280,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {pushing && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.primary + '20',
-                  border: `1px solid ${theme.colors.primary}`,
+                  border: `2px solid ${theme.colors.primary}`,
+                  boxShadow: `0 2px 8px ${theme.colors.primary}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.primary }}>
                     ↑ Pushing '{currentChar}' to stack
@@ -285,9 +292,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {popped && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.success + '20',
-                  border: `1px solid ${theme.colors.success}`,
+                  border: `2px solid ${theme.colors.success}`,
+                  boxShadow: `0 2px 8px ${theme.colors.success}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ↓ Popped '{popped}' from stack - Match successful
@@ -296,9 +304,10 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
               )}
 
               {mismatch && (
-                <div className="col-span-2 rounded-md p-3" style={{
+                <div className="col-span-2 rounded-lg p-3" style={{
                   backgroundColor: theme.colors.error + '20',
-                  border: `1px solid ${theme.colors.error}`,
+                  border: `2px solid ${theme.colors.error}`,
+                  boxShadow: `0 2px 8px ${theme.colors.error}30`,
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.error }}>
                     ✗ Bracket mismatch detected - Invalid string
