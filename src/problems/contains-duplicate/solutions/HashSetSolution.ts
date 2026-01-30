@@ -30,6 +30,7 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: 'Initialize an empty set to track seen values. We will check each element once.',
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -58,6 +59,7 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'return',
           description: `Element ${currentValue} at index ${i} is already in the set. Duplicate found!`,
+          lineNumber: 6,
           visualizationData: {
             arrays: [
               {
@@ -90,6 +92,7 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'comparison',
         description: `Check element ${currentValue} at index ${i}. Not in set, so add it.`,
+        lineNumber: 5,
         visualizationData: {
           arrays: [
             {
@@ -119,6 +122,7 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Added ${currentValue} to the set. Continue to next element.`,
+        lineNumber: 8,
         visualizationData: {
           arrays: [
             {
@@ -143,6 +147,7 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `Checked all ${nums.length} elements. No duplicates found. Return false.`,
+      lineNumber: 11,
       visualizationData: {
         arrays: [
           {

@@ -46,6 +46,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: 'Initialize empty stack. Opening brackets will be pushed, closing brackets will pop.',
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -78,6 +79,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'comparison',
           description: `Closing bracket '${char}' at index ${i}. ${matches ? `Matches top of stack '${stackTop}'.` : stackTop ? `Doesn't match top of stack '${stackTop}'.` : 'Stack is empty!'}`,
+          lineNumber: 12,
           visualizationData: {
             arrays: [
               {
@@ -93,6 +95,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
               parameters: { index: s.lastIndexOf(bracket, i) },
             })) as StackFrame[],
             custom: {
+              map: { ...map },
               currentChar: char,
               currentIndex: i,
               isClosing: true,
@@ -109,6 +112,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
             id: `step-${stepId++}`,
             type: 'return',
             description: `Mismatch! Expected '${expected}' but ${stackTop ? `got '${stackTop}'` : 'stack is empty'}. Return false.`,
+            lineNumber: 13,
             visualizationData: {
               arrays: [
                 {
@@ -124,6 +128,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
                 parameters: { index: s.lastIndexOf(bracket, i) },
               })) as StackFrame[],
               custom: {
+                map: { ...map },
                 currentChar: char,
                 currentIndex: i,
                 mismatch: true,
@@ -142,6 +147,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `Pop '${expected}' from stack. Match successful.`,
+          lineNumber: 15,
           visualizationData: {
             arrays: [
               {
@@ -157,6 +163,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
               parameters: { index: s.lastIndexOf(bracket, i) },
             })) as StackFrame[],
             custom: {
+              map: { ...map },
               currentChar: char,
               currentIndex: i,
               popped: expected,
@@ -171,6 +178,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `Opening bracket '${char}' at index ${i}. Push to stack.`,
+          lineNumber: 18,
           visualizationData: {
             arrays: [
               {
@@ -186,6 +194,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
               parameters: { index: s.lastIndexOf(bracket, i) },
             })) as StackFrame[],
             custom: {
+              map: { ...map },
               currentChar: char,
               currentIndex: i,
               isOpening: true,
@@ -201,6 +210,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `Pushed '${char}' to stack. Stack size: ${stack.length}`,
+          lineNumber: 18,
           visualizationData: {
             arrays: [
               {
@@ -216,6 +226,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
               parameters: { index: i },
             })) as StackFrame[],
             custom: {
+              map: { ...map },
               currentChar: char,
               currentIndex: i,
               pushed: true,
@@ -236,6 +247,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
       description: result
         ? 'Processed all characters. Stack is empty. All brackets matched. Return true.'
         : `Processed all characters. Stack still has ${stack.length} unmatched bracket(s). Return false.`,
+      lineNumber: 22,
       visualizationData: {
         arrays: [
           {
@@ -251,6 +263,7 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
           parameters: {},
         })) as StackFrame[],
         custom: {
+          map: { ...map },
           result,
           stackSize: stack.length,
           unmatchedBrackets: result ? undefined : [...stack],

@@ -46,6 +46,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: 'Start with array of strings. We will compare each string with all others to find anagrams.',
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -71,6 +72,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `String at index ${i} "${strs[i]}" already grouped. Skip.`,
+          lineNumber: 6,
           visualizationData: {
             arrays: [
               {
@@ -101,6 +103,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Start new group with "${strs[i]}" (sorted: "${sortedI}"). Look for anagrams.`,
+        lineNumber: 8,
         visualizationData: {
           arrays: [
             {
@@ -133,6 +136,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
           id: `step-${stepId++}`,
           type: 'comparison',
           description: `Compare "${strs[i]}" (${sortedI}) with "${strs[j]}" (${sortedJ}): ${isAnagram ? 'Match! Add to group' : 'Not a match'}`,
+          lineNumber: 15,
           visualizationData: {
             arrays: [
               {
@@ -168,6 +172,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
             id: `step-${stepId++}`,
             type: 'iteration',
             description: `Added "${strs[j]}" to current group.`,
+            lineNumber: 17,
             visualizationData: {
               arrays: [
                 {
@@ -200,6 +205,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Completed group with ${group.length} string(s): [${group.map(s => `"${s}"`).join(', ')}]`,
+        lineNumber: 22,
         visualizationData: {
           arrays: [
             {
@@ -226,6 +232,7 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `Grouped all strings into ${result.length} group(s) after ${comparisons} comparisons.`,
+      lineNumber: 25,
       visualizationData: {
         arrays: [
           {

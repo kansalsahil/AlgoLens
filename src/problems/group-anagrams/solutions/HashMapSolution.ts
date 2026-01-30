@@ -32,6 +32,7 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: 'Initialize empty hash map. Use sorted string as key to group anagrams.',
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -59,6 +60,7 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Process "${str}" → sorted key: "${sorted}"`,
+        lineNumber: 5,
         visualizationData: {
           arrays: [
             {
@@ -89,6 +91,7 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `Key "${sorted}" not in map. Create new group.`,
+          lineNumber: 7,
           visualizationData: {
             arrays: [
               {
@@ -119,6 +122,7 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Added "${str}" to group "${sorted}". Group now has ${map.get(sorted)!.length} string(s).`,
+        lineNumber: 10,
         visualizationData: {
           arrays: [
             {
@@ -150,6 +154,7 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `Convert map to array of groups. Total: ${result.length} group(s).`,
+      lineNumber: 13,
       visualizationData: {
         arrays: [
           {

@@ -39,8 +39,79 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
 
   return (
     <div className="space-y-8">
-      {/* Array Visualization */}
-      <ArrayAdapter array={array} transitionDuration={transitionDuration} />
+      {/* Array and Hash Map Visualization - Side by Side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Array Visualization */}
+        <div className="space-y-2">
+          <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
+            Input Strings
+          </div>
+          <ArrayAdapter array={array} transitionDuration={transitionDuration} />
+        </div>
+
+        {/* Hash Map Display (for hash map solution) */}
+        {isHashMap && map && Object.keys(map).length > 0 && (
+          <div className="space-y-2">
+            <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
+              Anagram Groups Map ({Object.keys(map).length} key{Object.keys(map).length > 1 ? 's' : ''})
+            </div>
+            <div
+              className="rounded-md p-4 space-y-2 max-h-96 overflow-y-auto"
+              style={{
+                backgroundColor: theme.colors.surface,
+                border: `1px solid ${theme.colors.border}`,
+              }}
+            >
+              {Object.entries(map).map(([key, value]: [string, any]) => {
+                const vals = Array.isArray(value) ? value : [];
+                return (
+                  <div
+                    key={key}
+                    className="p-3 rounded"
+                    style={{
+                      backgroundColor: key === sortedKey
+                        ? theme.colors.primary + '20'
+                        : theme.colors.background,
+                      border: `1px solid ${key === sortedKey ? theme.colors.primary : theme.colors.border}`,
+                    }}
+                  >
+                    <div className="flex flex-col gap-2">
+                      <div>
+                        <div className="text-xs font-medium mb-1" style={{ color: theme.colors.textSecondary }}>
+                          Key:
+                        </div>
+                        <div className="font-mono text-sm font-bold" style={{ color: theme.colors.text }}>
+                          "{key}"
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xs font-medium mb-1" style={{ color: theme.colors.textSecondary }}>
+                          Group ({vals.length}):
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {vals.map((str: string, idx: number) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-1 rounded font-mono text-sm"
+                              style={{
+                                backgroundColor: theme.colors.background,
+                                border: `1px solid ${theme.colors.border}`,
+                                color: theme.colors.text,
+                              }}
+                            >
+                              "{str}"
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Info Panel */}
       <div
@@ -194,69 +265,6 @@ export function GroupAnagramsVisualizer({ step, transitionDuration }: Visualizat
                 }}>
                   <div className="text-sm font-medium" style={{ color: theme.colors.success }}>
                     ✓ Added to group (size: {groupSize})
-                  </div>
-                </div>
-              )}
-
-              {/* Hash Map Display */}
-              {map && Object.keys(map).length > 0 && (
-                <div className="col-span-2 space-y-2">
-                  <div className="text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
-                    Anagram Groups Map
-                  </div>
-                  <div
-                    className="rounded-md p-4 space-y-2 max-h-64 overflow-y-auto"
-                    style={{
-                      backgroundColor: theme.colors.background,
-                      border: `1px solid ${theme.colors.border}`,
-                    }}
-                  >
-                    {Object.entries(map).map(([key, value]: [string, any]) => {
-                      const vals = Array.isArray(value) ? value : [];
-                      return (
-                        <div
-                          key={key}
-                          className="p-3 rounded"
-                          style={{
-                            backgroundColor: key === sortedKey
-                              ? theme.colors.primary + '20'
-                              : theme.colors.surface,
-                            border: `1px solid ${key === sortedKey ? theme.colors.primary : theme.colors.border}`,
-                          }}
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0">
-                              <div className="text-xs font-medium mb-1" style={{ color: theme.colors.textSecondary }}>
-                                Key:
-                              </div>
-                              <div className="font-mono text-sm font-bold" style={{ color: theme.colors.text }}>
-                                "{key}"
-                              </div>
-                            </div>
-                            <div className="flex-1">
-                              <div className="text-xs font-medium mb-1" style={{ color: theme.colors.textSecondary }}>
-                                Group ({vals.length}):
-                              </div>
-                              <div className="flex flex-wrap gap-2">
-                                {vals.map((str: string, idx: number) => (
-                                  <span
-                                    key={idx}
-                                    className="px-2 py-1 rounded font-mono text-sm"
-                                    style={{
-                                      backgroundColor: theme.colors.background,
-                                      border: `1px solid ${theme.colors.border}`,
-                                      color: theme.colors.text,
-                                    }}
-                                  >
-                                    "{str}"
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
                   </div>
                 </div>
               )}

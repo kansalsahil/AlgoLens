@@ -25,6 +25,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: `Start with strings: s = "${s}", t = "${t}"`,
+      lineNumber: 1,
       visualizationData: {
         arrays: [
           {
@@ -56,6 +57,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'return',
         description: `Strings have different lengths (${s.length} vs ${t.length}). Cannot be anagrams. Return false.`,
+        lineNumber: 2,
         visualizationData: {
           arrays: [
             {
@@ -94,6 +96,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'iteration',
       description: `Sort both strings alphabetically.`,
+      lineNumber: 4,
       visualizationData: {
         arrays: [
           {
@@ -126,6 +129,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'comparison',
         description: `Compare position ${i}: '${sortedS[i]}' vs '${sortedT[i]}' - ${match ? 'Match' : 'Mismatch'}`,
+        lineNumber: 7,
         visualizationData: {
           arrays: [
             {
@@ -159,6 +163,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'return',
           description: `Mismatch found at position ${i}: '${sortedS[i]}' ≠ '${sortedT[i]}'. Not anagrams. Return false.`,
+          lineNumber: 7,
           visualizationData: {
             arrays: [
               {
@@ -194,6 +199,7 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `All characters match after sorting. The strings are anagrams. Return true.`,
+      lineNumber: 7,
       visualizationData: {
         arrays: [
           {

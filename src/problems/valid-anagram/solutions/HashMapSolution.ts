@@ -41,6 +41,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: `Start with strings: s = "${s}", t = "${t}". Initialize an empty character count map.`,
+      lineNumber: 4,
       visualizationData: {
         arrays: [
           {
@@ -72,6 +73,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'return',
         description: `Strings have different lengths (${s.length} vs ${t.length}). Cannot be anagrams. Return false.`,
+        lineNumber: 2,
         visualizationData: {
           arrays: [
             {
@@ -106,6 +108,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'iteration',
       description: `Phase 1: Count frequency of each character in string s.`,
+      lineNumber: 7,
       visualizationData: {
         arrays: [
           {
@@ -145,6 +148,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Character '${char}' at index ${i}: increment count to ${charCount.get(char)}`,
+        lineNumber: 8,
         visualizationData: {
           arrays: [
             {
@@ -178,6 +182,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'iteration',
       description: `Phase 2: Decrement counts using characters from string t.`,
+      lineNumber: 12,
       visualizationData: {
         arrays: [
           {
@@ -216,6 +221,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'return',
           description: `Character '${char}' at index ${i} not found in map. Strings are not anagrams. Return false.`,
+          lineNumber: 13,
           visualizationData: {
             arrays: [
               {
@@ -263,6 +269,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Character '${char}' at index ${i}: ${newCount === 0 ? 'count reaches 0, remove from map' : `decrement count to ${newCount}`}`,
+        lineNumber: 15,
         visualizationData: {
           arrays: [
             {
@@ -297,6 +304,7 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `All characters processed. Map is ${result ? 'empty' : 'not empty'}. ${result ? 'Strings are anagrams' : 'Strings are not anagrams'}. Return ${result}.`,
+      lineNumber: 22,
       visualizationData: {
         arrays: [
           {

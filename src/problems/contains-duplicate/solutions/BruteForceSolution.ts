@@ -27,6 +27,7 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: 'Start with the array. We will compare each element with all elements after it.',
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -54,6 +55,7 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'iteration',
         description: `Outer loop: Checking element at index ${i} (value = ${nums[i]})`,
+        lineNumber: 2,
         visualizationData: {
           arrays: [
             {
@@ -83,6 +85,7 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'comparison',
           description: `Compare nums[${i}] (${nums[i]}) with nums[${j}] (${nums[j]}): ${isMatch ? 'Match found!' : 'No match'}`,
+          lineNumber: 4,
           visualizationData: {
             arrays: [
               {
@@ -115,6 +118,7 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
             id: `step-${stepId++}`,
             type: 'return',
             description: `Duplicate found! nums[${i}] = nums[${j}] = ${nums[i]}. Return true.`,
+            lineNumber: 5,
             visualizationData: {
               arrays: [
                 {
@@ -147,6 +151,7 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
         id: `step-${stepId++}`,
         type: 'return',
         description: `No duplicates found after ${comparisons} comparisons. Return false.`,
+        lineNumber: 9,
         visualizationData: {
           arrays: [
             {

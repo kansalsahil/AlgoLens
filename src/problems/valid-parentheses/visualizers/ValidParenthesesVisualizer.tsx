@@ -44,41 +44,49 @@ export function ValidParenthesesVisualizer({ step, transitionDuration }: Visuali
 
   return (
     <div className="space-y-8">
-      {/* String Visualization */}
-      <ArrayAdapter array={array} transitionDuration={transitionDuration} />
-
-      {/* Stack Visualization (for stack solution) */}
-      {isStack && (
+      {/* String and Stack Visualization - Side by Side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* String Visualization */}
         <div className="space-y-2">
-          <div
-            className="text-center text-sm font-medium py-2"
-            style={{ color: theme.colors.textSecondary }}
-          >
-            {stack && stack.length > 0 ? `Stack has ${stack.length} opening bracket(s)` : 'Stack is empty'}
+          <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
+            Input String
           </div>
-          {stack && stack.length > 0 ? (
-            <StackAdapter
-              stack={stack}
-              transitionDuration={transitionDuration}
-              config={{
-                title: 'Opening Brackets Stack',
-              }}
-            />
-          ) : (
-            <div
-              className="text-center p-8 rounded-lg"
-              style={{
-                backgroundColor: theme.colors.surface,
-                border: `2px dashed ${theme.colors.border}`,
-                color: theme.colors.textSecondary,
-              }}
-            >
-              <div className="text-lg font-semibold">Empty Stack</div>
-              <div className="text-sm mt-2">No unmatched opening brackets</div>
-            </div>
-          )}
+          <ArrayAdapter array={array} transitionDuration={transitionDuration} />
         </div>
-      )}
+
+        {/* Stack Visualization (for stack solution) */}
+        {isStack && (
+          <div className="space-y-2">
+            <div
+              className="text-center text-sm font-medium"
+              style={{ color: theme.colors.textSecondary }}
+            >
+              {stack && stack.length > 0 ? `Stack (${stack.length} opening bracket${stack.length > 1 ? 's' : ''})` : 'Stack (empty)'}
+            </div>
+            {stack && stack.length > 0 ? (
+              <StackAdapter
+                stack={stack}
+                transitionDuration={transitionDuration}
+                config={{
+                  title: 'Opening Brackets',
+                }}
+              />
+            ) : (
+              <div
+                className="text-center p-8 rounded-lg"
+                style={{
+                  backgroundColor: theme.colors.surface,
+                  border: `2px dashed ${theme.colors.border}`,
+                  color: theme.colors.textSecondary,
+                }}
+              >
+                <div className="text-lg font-semibold">Empty Stack</div>
+                <div className="text-sm mt-2">No unmatched opening brackets</div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Info Panel */}
       <div

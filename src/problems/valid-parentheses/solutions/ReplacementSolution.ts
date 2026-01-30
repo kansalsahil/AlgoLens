@@ -32,6 +32,7 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'initialization',
       description: `Start with string: "${s}". Will repeatedly remove valid pairs.`,
+      lineNumber: 2,
       visualizationData: {
         arrays: [
           {
@@ -77,6 +78,7 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'comparison',
           description: `Found pair "${pairFound}" at index ${pairIndex}. Remove it.`,
+          lineNumber: 4,
           visualizationData: {
             arrays: [
               {
@@ -104,6 +106,7 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'iteration',
           description: `After removal: "${s.length > 0 ? s : '(empty)'}"${s.length > 0 ? '. Continue searching.' : ''}`,
+          lineNumber: 4,
           visualizationData: {
             arrays: [
               {
@@ -130,6 +133,7 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
           id: `step-${stepId++}`,
           type: 'return',
           description: `No valid pairs found in "${s}". String is invalid. Return false.`,
+          lineNumber: 8,
           visualizationData: {
             arrays: [
               {
@@ -159,6 +163,7 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
       id: `step-${stepId++}`,
       type: 'return',
       description: `String is empty after ${iterations} iteration(s). All brackets matched. Return true.`,
+      lineNumber: 12,
       visualizationData: {
         arrays: [
           {
