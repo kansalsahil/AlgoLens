@@ -8,3 +8,5 @@ import './group-anagrams';
 import './valid-parentheses';
 import './find-minimum-rotated-array';
 import './search-rotated-array';
+import './valid-palindrome';
+import './three-sum';
