@@ -37,23 +37,17 @@ export function AboutPage() {
           </div>
 
           {/* Contact Details */}
-          <div
-            className="mb-8 p-4 rounded-lg text-center"
-            style={{
-              backgroundColor: theme.colors.background,
-              border: `1px solid ${theme.colors.border}`,
-            }}
-          >
+          <div className="mb-8 text-center">
             <p className="text-sm mb-2" style={{ color: theme.colors.textSecondary }}>
-              For feedback and suggestions, please reach out to
+              For feedback and suggestions, please reach out to{' '}
+              <a
+                href="mailto:kansal.sahil@hotmail.com"
+                className="font-medium hover:underline transition-all"
+                style={{ color: theme.colors.primary }}
+              >
+                kansal.sahil@hotmail.com
+              </a>
             </p>
-            <a
-              href="mailto:kansal.sahil@hotmail.com"
-              className="text-sm font-medium hover:underline transition-all"
-              style={{ color: theme.colors.primary }}
-            >
-              kansal.sahil@hotmail.com
-            </a>
           </div>
 
           {/* CTA Button */}
