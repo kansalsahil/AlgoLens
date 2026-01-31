@@ -15,35 +15,3 @@ code, pre {
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Monaco, Consolas, monospace;
   font-feature-settings: 'liga' 1, 'calt' 1;
 }
-
-/* Custom Scrollbar Styles */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(99, 102, 241, 0.5) rgba(99, 102, 241, 0.1);
-}
-
-/* Webkit browsers (Chrome, Safari, Edge) */
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: rgba(99, 102, 241, 0.1);
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.5);
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.8);
-}
-
-/* Smooth scrolling */
-* {
-  scroll-behavior: smooth;
-}

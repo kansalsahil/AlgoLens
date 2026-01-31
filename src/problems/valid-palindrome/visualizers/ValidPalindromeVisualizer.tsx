@@ -33,49 +33,51 @@ export function ValidPalindromeVisualizer({ step, transitionDuration }: Visualiz
 
   return (
     <div className="space-y-8">
-      {/* Array Visualization with Horizontal Scroll */}
+      {/* Array Visualization - Scaled to Fit */}
       {arrays && arrays.length > 0 && (
         <div className="space-y-4">
-          {arrays.map((array) => (
-            <div key={array.id} className="space-y-2">
-              <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
-                {array.name}
-              </div>
-              <div
-                className="relative"
-              >
-                <div
-                  className="overflow-x-auto pb-4 px-2"
-                  style={{
-                    maskImage: array.values.length > 20
-                      ? 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
-                      : 'none',
-                    WebkitMaskImage: array.values.length > 20
-                      ? 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
-                      : 'none',
-                  }}
-                >
-                  <div className="min-w-max px-4">
-                    <ArrayAdapter array={array} transitionDuration={transitionDuration} />
-                  </div>
+          {arrays.map((array) => {
+            // Calculate element size based on array length to fit without scrolling
+            // Account for left panel (problem statement) and right panel (solution code) taking up space
+            // Assume ~800px for panels + margins, leaving ~600px for center content on typical screens
+            const availableWidth = typeof window !== 'undefined' ? Math.min(window.innerWidth - 800, 700) : 600;
+            const defaultElementWidth = 64;
+            const gap = 4;
+            const arrayLength = array.values.length;
+
+            // Calculate required width and scale down element size if needed
+            const requiredWidth = (arrayLength * defaultElementWidth) + ((arrayLength - 1) * gap);
+            let elementWidth = defaultElementWidth;
+            let elementHeight = defaultElementWidth;
+
+            if (requiredWidth > availableWidth) {
+              // Scale down elements to fit
+              elementWidth = Math.max(20, Math.floor((availableWidth - (arrayLength - 1) * gap) / arrayLength));
+              elementHeight = elementWidth;
+            }
+
+            return (
+              <div key={array.id} className="space-y-2">
+                <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
+                  {array.name} {elementWidth < defaultElementWidth && (
+                    <span className="text-xs opacity-60">({array.values.length} chars)</span>
+                  )}
                 </div>
-                {array.values.length > 20 && (
-                  <div className="absolute bottom-0 left-0 right-0 text-center pb-1">
-                    <div
-                      className="text-xs inline-block px-2 py-0.5 rounded"
-                      style={{
-                        backgroundColor: theme.colors.surface + 'CC',
-                        color: theme.colors.textSecondary,
-                        border: `1px solid ${theme.colors.border}`,
-                      }}
-                    >
-                      ← Scroll to view all →
-                    </div>
-                  </div>
-                )}
+                <div className="w-full flex justify-center">
+                  <ArrayAdapter
+                    array={array}
+                    transitionDuration={transitionDuration}
+                    config={{
+                      layout: {
+                        elementSize: { width: elementWidth, height: elementHeight },
+                        gap,
+                      },
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
