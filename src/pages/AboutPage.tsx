@@ -44,12 +44,12 @@ export function AboutPage() {
               border: `1px solid ${theme.colors.border}`,
             }}
           >
-            <div className="text-sm font-semibold mb-2" style={{ color: theme.colors.text }}>
-              Contact
-            </div>
+            <p className="text-sm mb-2" style={{ color: theme.colors.textSecondary }}>
+              For feedback and suggestions, please reach out to
+            </p>
             <a
               href="mailto:kansal.sahil@hotmail.com"
-              className="text-sm hover:underline transition-all"
+              className="text-sm font-medium hover:underline transition-all"
               style={{ color: theme.colors.primary }}
             >
               kansal.sahil@hotmail.com
