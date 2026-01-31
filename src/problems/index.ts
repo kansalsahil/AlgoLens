@@ -6,3 +6,5 @@ import './contains-duplicate';
 import './valid-anagram';
 import './group-anagrams';
 import './valid-parentheses';
+import './find-minimum-rotated-array';
+import './search-rotated-array';
