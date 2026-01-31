@@ -33,7 +33,7 @@ export function ValidPalindromeVisualizer({ step, transitionDuration }: Visualiz
 
   return (
     <div className="space-y-8">
-      {/* Array Visualization */}
+      {/* Array Visualization with Horizontal Scroll */}
       {arrays && arrays.length > 0 && (
         <div className="space-y-4">
           {arrays.map((array) => (
@@ -41,7 +41,39 @@ export function ValidPalindromeVisualizer({ step, transitionDuration }: Visualiz
               <div className="text-center text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
                 {array.name}
               </div>
-              <ArrayAdapter array={array} transitionDuration={transitionDuration} />
+              <div
+                className="relative"
+              >
+                <div
+                  className="overflow-x-auto pb-4 px-2"
+                  style={{
+                    maskImage: array.values.length > 20
+                      ? 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
+                      : 'none',
+                    WebkitMaskImage: array.values.length > 20
+                      ? 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
+                      : 'none',
+                  }}
+                >
+                  <div className="min-w-max px-4">
+                    <ArrayAdapter array={array} transitionDuration={transitionDuration} />
+                  </div>
+                </div>
+                {array.values.length > 20 && (
+                  <div className="absolute bottom-0 left-0 right-0 text-center pb-1">
+                    <div
+                      className="text-xs inline-block px-2 py-0.5 rounded"
+                      style={{
+                        backgroundColor: theme.colors.surface + 'CC',
+                        color: theme.colors.textSecondary,
+                        border: `1px solid ${theme.colors.border}`,
+                      }}
+                    >
+                      ← Scroll to view all →
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
