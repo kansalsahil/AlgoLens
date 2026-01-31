@@ -36,6 +36,26 @@ export function AboutPage() {
             </p>
           </div>
 
+          {/* Contact Details */}
+          <div
+            className="mb-8 p-4 rounded-lg text-center"
+            style={{
+              backgroundColor: theme.colors.background,
+              border: `1px solid ${theme.colors.border}`,
+            }}
+          >
+            <div className="text-sm font-semibold mb-2" style={{ color: theme.colors.text }}>
+              Contact
+            </div>
+            <a
+              href="mailto:kansal.sahil@hotmail.com"
+              className="text-sm hover:underline transition-all"
+              style={{ color: theme.colors.primary }}
+            >
+              kansal.sahil@hotmail.com
+            </a>
+          </div>
+
           {/* CTA Button */}
           <div className="flex justify-center">
             <button
