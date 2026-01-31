@@ -10,3 +10,8 @@ import './find-minimum-rotated-array';
 import './search-rotated-array';
 import './valid-palindrome';
 import './three-sum';
+import './merge-two-sorted-lists';
+import './linked-list-cycle';
+import './reorder-list';
+import './remove-nth-node-from-end';
+import './merge-k-sorted-lists';

@@ -1,9 +1,65 @@
-import { Problem } from '../../core/types';
+import { Problem, ListNode } from '../../core/types';
 import { DIFFICULTY_COLORS } from '../../config';
 import { useTheme } from '../../hooks';
 
 interface ProblemDescriptionProps {
   problem: Problem;
+}
+
+// Helper to safely stringify values, including linked lists
+function safeStringify(value: any): string {
+  if (value === null || value === undefined) {
+    return String(value);
+  }
+
+  // Check if it's a linked list (has id, value, and next properties)
+  if (typeof value === 'object' && 'value' in value && 'next' in value && 'id' in value) {
+    // Convert linked list to array representation
+    const values: any[] = [];
+    let current: ListNode | null = value;
+    const seen = new Set<string>();
+
+    while (current !== null) {
+      // Detect cycles
+      if (seen.has(current.id)) {
+        values.push('...(cycle)');
+        break;
+      }
+      seen.add(current.id);
+      values.push(current.value);
+      current = current.next;
+    }
+    return `[${values.join(',')}]`;
+  }
+
+  // Check if it's an object with linked list properties
+  if (typeof value === 'object') {
+    const result: any = {};
+    for (const key in value) {
+      if (value.hasOwnProperty(key)) {
+        result[key] = safeStringify(value[key]);
+      }
+    }
+
+    // If all values are strings (already stringified), format nicely
+    const allStrings = Object.values(result).every(v => typeof v === 'string');
+    if (allStrings) {
+      const formatted = Object.entries(result)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join(', ');
+      return `{ ${formatted} }`;
+    }
+
+    return JSON.stringify(result);
+  }
+
+  // For arrays
+  if (Array.isArray(value)) {
+    return `[${value.map(v => safeStringify(v)).join(',')}]`;
+  }
+
+  // For primitives
+  return JSON.stringify(value);
 }
 
 export function ProblemDescription({ problem }: ProblemDescriptionProps) {
@@ -47,7 +103,7 @@ export function ProblemDescription({ problem }: ProblemDescriptionProps) {
                   border: `1px solid ${theme.colors.border}`,
                 }}
               >
-                {JSON.stringify(example.input)}
+                {safeStringify(example.input)}
               </code>
             </div>
             <div>
@@ -60,7 +116,7 @@ export function ProblemDescription({ problem }: ProblemDescriptionProps) {
                   border: `1px solid ${theme.colors.border}`,
                 }}
               >
-                {JSON.stringify(example.output)}
+                {safeStringify(example.output)}
               </code>
             </div>
             {example.explanation && (

@@ -2,8 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import type React from 'react';
 import { useTheme } from '../../hooks';
 
-interface SearchableDropdownProps<T extends string> {
+export interface OptionCategory<T extends string> {
+  label: string;
   options: T[];
+}
+
+interface SearchableDropdownProps<T extends string> {
+  options?: T[];
+  categories?: OptionCategory<T>[];
   selected: T[];
   onChange: (selected: T[]) => void;
   placeholder: string;
@@ -13,6 +19,7 @@ interface SearchableDropdownProps<T extends string> {
 
 export function SearchableDropdown<T extends string>({
   options,
+  categories,
   selected,
   onChange,
   placeholder,
@@ -24,10 +31,23 @@ export function SearchableDropdown<T extends string>({
   const [searchQuery, setSearchQuery] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Get all options from either direct options or categories
+  const allOptions = categories
+    ? categories.flatMap(cat => cat.options)
+    : (options || []);
+
   // Filter options based on search query
-  const filteredOptions = options.filter(option =>
+  const filteredOptions = allOptions.filter(option =>
     option.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Group filtered options by category if categories are provided
+  const filteredCategories = categories
+    ? categories.map(cat => ({
+        label: cat.label,
+        options: cat.options.filter(opt => filteredOptions.includes(opt)),
+      })).filter(cat => cat.options.length > 0)
+    : null;
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -159,7 +179,67 @@ export function SearchableDropdown<T extends string>({
                 <div className="p-4 text-center text-sm" style={{ color: theme.colors.textSecondary }}>
                   No options found
                 </div>
+              ) : filteredCategories ? (
+                // Render with categories
+                filteredCategories.map((category, idx) => (
+                  <div key={category.label}>
+                    <div
+                      className="px-4 py-2 text-xs font-semibold uppercase tracking-wider sticky top-0"
+                      style={{
+                        backgroundColor: theme.colors.surface,
+                        color: theme.colors.textSecondary,
+                        borderBottom: `1px solid ${theme.colors.border}`,
+                      }}
+                    >
+                      {category.label}
+                    </div>
+                    {category.options.map(option => {
+                      const isSelected = selected.includes(option);
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => toggleOption(option)}
+                          className="w-full px-4 py-2 text-left hover:bg-opacity-50 transition-all flex items-center gap-2"
+                          style={{
+                            backgroundColor: isSelected
+                              ? theme.colors.primary + '20'
+                              : 'transparent',
+                            color: isSelected ? theme.colors.primary : theme.colors.text,
+                          }}
+                        >
+                          <div
+                            className="w-4 h-4 rounded border flex items-center justify-center"
+                            style={{
+                              borderColor: isSelected ? theme.colors.primary : theme.colors.border,
+                              backgroundColor: isSelected ? theme.colors.primary : 'transparent',
+                            }}
+                          >
+                            {isSelected && (
+                              <svg
+                                className="w-3 h-3 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={3}
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            )}
+                          </div>
+                          {renderIcon && renderIcon(option)}
+                          <span className="flex-1">{option}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))
               ) : (
+                // Render without categories
                 filteredOptions.map(option => {
                   const isSelected = selected.includes(option);
                   return (

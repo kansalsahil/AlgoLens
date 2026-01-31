@@ -1,14 +1,12 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProblem, useTheme } from '../hooks';
 import { DIFFICULTY_COLORS } from '../config';
 import { ThemeSelector } from '../components/ui/ThemeSelector';
 import { getIconForTag } from '../components/ui/DataStructureIcons';
-import { SearchableDropdown } from '../components/ui/SearchableDropdown';
+import { SearchableDropdown, OptionCategory } from '../components/ui/SearchableDropdown';
 import { ProblemTag } from '../core/types';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const PROBLEMS_PER_PAGE = 12;
 
 export function HomePage() {
   const { allProblems, allTags } = useProblem();
@@ -17,7 +15,6 @@ export function HomePage() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<ProblemTag[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
 
   // Filter problems based on search and tags
   const filteredProblems = useMemo(() => {
@@ -45,33 +42,42 @@ export function HomePage() {
     return filtered;
   }, [allProblems, searchQuery, selectedTags]);
 
-  // Pagination
-  const totalPages = Math.ceil(filteredProblems.length / PROBLEMS_PER_PAGE);
-  const paginatedProblems = useMemo(() => {
-    const start = (currentPage - 1) * PROBLEMS_PER_PAGE;
-    return filteredProblems.slice(start, start + PROBLEMS_PER_PAGE);
-  }, [filteredProblems, currentPage]);
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedTags]);
-
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedTags([]);
   };
 
-  // Group tags by type for better organization
-  const dataStructureTags = allTags.filter(tag => 
-    ['Array', 'Linked List', 'Tree', 'Hash Map', 'Stack', 'Queue', 'Graph'].includes(tag)
-  );
-  const approachTags = allTags.filter(tag => 
-    ['Recursive', 'Iterative'].includes(tag)
-  );
-  const otherTags = allTags.filter(tag => 
-    !['Array', 'Linked List', 'Tree', 'Hash Map', 'Stack', 'Queue', 'Graph', 'Recursive', 'Iterative'].includes(tag)
-  );
+  // Categorize tags
+  const tagCategories: OptionCategory<ProblemTag>[] = useMemo(() => {
+    const dataStructures: ProblemTag[] = ['Array', 'Linked List', 'Tree', 'Hash Map', 'Stack', 'Queue', 'Graph'];
+    const algorithms: ProblemTag[] = ['Binary Search', 'Two Pointers', 'Sliding Window', 'Dynamic Programming', 'Greedy', 'Backtracking'];
+    const approaches: ProblemTag[] = ['Recursive', 'Iterative'];
+    const other: ProblemTag[] = ['String'];
+
+    const categories: OptionCategory<ProblemTag>[] = [];
+
+    const dataStructureTags = allTags.filter(tag => dataStructures.includes(tag));
+    if (dataStructureTags.length > 0) {
+      categories.push({ label: 'Data Structures', options: dataStructureTags });
+    }
+
+    const algorithmTags = allTags.filter(tag => algorithms.includes(tag));
+    if (algorithmTags.length > 0) {
+      categories.push({ label: 'Algorithms', options: algorithmTags });
+    }
+
+    const approachTags = allTags.filter(tag => approaches.includes(tag));
+    if (approachTags.length > 0) {
+      categories.push({ label: 'Approaches', options: approachTags });
+    }
+
+    const otherTags = allTags.filter(tag => other.includes(tag));
+    if (otherTags.length > 0) {
+      categories.push({ label: 'Other', options: otherTags });
+    }
+
+    return categories;
+  }, [allTags]);
 
   const renderTagIcon = (tag: ProblemTag) => {
     const IconComponent = getIconForTag(tag);
@@ -186,53 +192,17 @@ export function HomePage() {
           style={{ backgroundColor: theme.colors.border }}
         />
 
-        {/* Filter Tags */}
-        {allTags.length > 0 && (
+        {/* Filter Tags - Categorized */}
+        {tagCategories.length > 0 && (
           <div className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Data Structure Tags */}
-              {dataStructureTags.length > 0 && (
-                <SearchableDropdown
-                  options={dataStructureTags}
-                  selected={selectedTags.filter(tag => dataStructureTags.includes(tag))}
-                  onChange={(tags) => {
-                    const otherSelected = selectedTags.filter(tag => !dataStructureTags.includes(tag));
-                    setSelectedTags([...otherSelected, ...tags]);
-                  }}
-                  placeholder="Select data structures..."
-                  label="Data Structures"
-                  renderIcon={(tag) => renderTagIcon(tag)}
-                />
-              )}
-
-              {/* Approach Tags */}
-              {approachTags.length > 0 && (
-                <SearchableDropdown
-                  options={approachTags}
-                  selected={selectedTags.filter(tag => approachTags.includes(tag))}
-                  onChange={(tags) => {
-                    const otherSelected = selectedTags.filter(tag => !approachTags.includes(tag));
-                    setSelectedTags([...otherSelected, ...tags]);
-                  }}
-                  placeholder="Select approaches..."
-                  label="Approaches"
-                />
-              )}
-
-              {/* Other Tags */}
-              {otherTags.length > 0 && (
-                <SearchableDropdown
-                  options={otherTags}
-                  selected={selectedTags.filter(tag => otherTags.includes(tag))}
-                  onChange={(tags) => {
-                    const otherSelected = selectedTags.filter(tag => !otherTags.includes(tag));
-                    setSelectedTags([...otherSelected, ...tags]);
-                  }}
-                  placeholder="Select other tags..."
-                  label="Other Tags"
-                />
-              )}
-            </div>
+            <SearchableDropdown
+              categories={tagCategories}
+              selected={selectedTags}
+              onChange={setSelectedTags}
+              placeholder="Select tags to filter..."
+              label="Filter by Tags"
+              renderIcon={(tag) => renderTagIcon(tag)}
+            />
           </div>
         )}
 
@@ -251,11 +221,10 @@ export function HomePage() {
         </div>
 
         {/* Problems Grid */}
-        {paginatedProblems.length > 0 ? (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              <AnimatePresence mode="wait">
-                {paginatedProblems.map(problem => (
+        {filteredProblems.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence mode="wait">
+              {filteredProblems.map(problem => (
                   <motion.button
                     key={problem.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -364,71 +333,6 @@ export function HomePage() {
                 ))}
               </AnimatePresence>
             </div>
-
-            {/* Horizontal Divider */}
-            {totalPages > 1 && (
-              <div 
-                className="mb-6 h-px"
-                style={{ backgroundColor: theme.colors.border }}
-              />
-            )}
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2">
-                <button
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: currentPage === 1 ? theme.colors.surface : theme.colors.primary,
-                    color: currentPage === 1 ? theme.colors.textSecondary : '#ffffff',
-                  }}
-                >
-                  Previous
-                </button>
-                <div className="flex gap-1">
-                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                    let pageNum;
-                    if (totalPages <= 5) {
-                      pageNum = i + 1;
-                    } else if (currentPage <= 3) {
-                      pageNum = i + 1;
-                    } else if (currentPage >= totalPages - 2) {
-                      pageNum = totalPages - 4 + i;
-                    } else {
-                      pageNum = currentPage - 2 + i;
-                    }
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => setCurrentPage(pageNum)}
-                        className="w-10 h-10 rounded-lg font-medium transition-all relative"
-                        style={{
-                          backgroundColor: currentPage === pageNum ? theme.colors.primary : theme.colors.surface,
-                          color: currentPage === pageNum ? '#ffffff' : theme.colors.text,
-                          border: `1px solid ${currentPage === pageNum ? theme.colors.primary : theme.colors.border}`,
-                        }}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-                </div>
-                <button
-                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: currentPage === totalPages ? theme.colors.surface : theme.colors.primary,
-                    color: currentPage === totalPages ? theme.colors.textSecondary : '#ffffff',
-                  }}
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </div>
         ) : (
           <div className="text-center py-20">
             <p className="text-xl mb-2" style={{ color: theme.colors.textSecondary }}>

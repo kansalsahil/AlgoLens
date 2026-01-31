@@ -31,7 +31,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
       {useFixedLayout ? (
         <div className="flex flex-col gap-8">
           {/* Linked List and Stack side by side */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-8">
             {/* Fixed layout visualization with dynamic arrows */}
             <div className="flex flex-col items-center gap-8 p-8">
               <motion.h3
@@ -251,7 +251,7 @@ export function ReverseLinkedListVisualizer({ step, transitionDuration = 0.4 }: 
         </div>
       ) : (
         // Fallback to default rendering for recursive solution
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-col items-center gap-8 p-8">
             <motion.h3
               initial={{ opacity: 0, y: -10 }}
