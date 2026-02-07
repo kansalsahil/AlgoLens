@@ -36,6 +36,69 @@ export const TwoPassSolution: Solution<RemoveNthNodeFromEndInput, ListNode | nul
   return head;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  // First pass: count length                          // Line 2
+  int length = 0;                                       // Line 3
+  ListNode current = head;
+  while (current != null) {                             // Line 5
+    length++;
+    current = current.next;
+  }
+                                                        // Line 9
+  // Calculate position from start                      // Line 10
+  int target = length - n;                              // Line 11
+                                                        // Line 12
+  // Handle removing head                               // Line 13
+  if (target == 0) {                                    // Line 14
+    return head.next;
+  }
+                                                        // Line 17
+  // Second pass: find and remove                       // Line 18
+  current = head;
+  for (int i = 0; i < target - 1; i++) {
+    current = current.next;
+  }
+                                                        // Line 22
+  current.next = current.next.next;                    // Line 23
+                                                        // Line 24
+  return head;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  // First pass: count length                          // Line 2
+  int length = 0;                                       // Line 3
+  ListNode current = head;
+  while (current != null) {                             // Line 5
+    length++;
+    current = current.next;
+  }
+                                                        // Line 9
+  // Calculate position from start                      // Line 10
+  int target = length - n;                              // Line 11
+                                                        // Line 12
+  // Handle removing head                               // Line 13
+  if (target == 0) {                                    // Line 14
+    return head.next;
+  }
+                                                        // Line 17
+  // Second pass: find and remove                       // Line 18
+  current = head;
+  for (int i = 0; i < target - 1; i++) {
+    current = current.next;
+  }
+                                                        // Line 22
+  current.next = current.next.next;                    // Line 23
+                                                        // Line 24
+  return head;
+}`,
+    },
+  ],
+
   execute: (input: RemoveNthNodeFromEndInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

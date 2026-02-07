@@ -28,6 +28,53 @@ export const IterativeSolution: Solution<MergeTwoSortedListsInput, ListNode | nu
   return dummy.next;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  ListNode dummy = new ListNode(0);                         // Line 2
+  ListNode current = dummy;
+                                                            // Line 4
+  while (list1 != null && list2 != null) {                 // Line 5
+    if (list1.val <= list2.val) {                           // Line 6
+      current.next = list1;
+      list1 = list1.next;
+    } else {                                                // Line 9
+      current.next = list2;
+      list2 = list2.next;
+    }
+    current = current.next;
+  }
+                                                            // Line 15
+  current.next = list1 != null ? list1 : list2;            // Line 16
+                                                            // Line 17
+  return dummy.next;                                        // Line 18
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  ListNode dummy = new ListNode(0);                         // Line 2
+  ListNode current = dummy;
+                                                            // Line 4
+  while (list1 != null && list2 != null) {                 // Line 5
+    if (list1.val <= list2.val) {                           // Line 6
+      current.next = list1;
+      list1 = list1.next;
+    } else {                                                // Line 9
+      current.next = list2;
+      list2 = list2.next;
+    }
+    current = current.next;
+  }
+                                                            // Line 15
+  current.next = list1 != null ? list1 : list2;            // Line 16
+                                                            // Line 17
+  return dummy.next;                                        // Line 18
+}`,
+    },
+  ],
+
   execute: (input: MergeTwoSortedListsInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

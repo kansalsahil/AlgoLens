@@ -17,6 +17,35 @@ export const BruteForceSolution: Solution<ContainsDuplicateInput, boolean> = {
   }
   return false;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  for (int i = 0; i < nums.length; i++) {
+    for (int j = i + 1; j < nums.length; j++) {
+      if (nums[i] == nums[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  for (int i = 0; i < nums.Length; i++) {
+    for (int j = i + 1; j < nums.Length; j++) {
+      if (nums[i] == nums[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}`,
+    },
+  ],
   execute: (input: ContainsDuplicateInput): SolutionExecution<boolean> => {
     const { nums } = input;
     const steps: AnimationStep[] = [];

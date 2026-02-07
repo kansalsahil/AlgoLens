@@ -39,6 +39,75 @@ function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | nul
   return dummy.next;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (lists.length == 0) return null;                  // Line 2
+                                                        // Line 3
+  ListNode result = lists[0];                           // Line 4
+                                                        // Line 5
+  for (int i = 1; i < lists.length; i++) {             // Line 6
+    result = mergeTwoLists(result, lists[i]);
+  }
+                                                        // Line 9
+  return result;                                        // Line 10
+}                                                       // Line 11
+                                                        // Line 12
+ListNode mergeTwoLists(ListNode l1, ListNode l2) {     // Line 13
+  ListNode dummy = new ListNode(0);
+  ListNode current = dummy;
+
+  while (l1 != null && l2 != null) {
+    if (l1.val <= l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
+    }
+    current = current.next;
+  }
+
+  current.next = l1 != null ? l1 : l2;
+  return dummy.next;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (lists.Length == 0) return null;                  // Line 2
+                                                        // Line 3
+  ListNode result = lists[0];                           // Line 4
+                                                        // Line 5
+  for (int i = 1; i < lists.Length; i++) {             // Line 6
+    result = MergeTwoLists(result, lists[i]);
+  }
+                                                        // Line 9
+  return result;                                        // Line 10
+}                                                       // Line 11
+                                                        // Line 12
+ListNode MergeTwoLists(ListNode l1, ListNode l2) {     // Line 13
+  ListNode dummy = new ListNode(0);
+  ListNode current = dummy;
+
+  while (l1 != null && l2 != null) {
+    if (l1.val <= l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
+    }
+    current = current.next;
+  }
+
+  current.next = l1 != null ? l1 : l2;
+  return dummy.next;
+}`,
+    },
+  ],
+
   execute: (input: MergeKSortedListsInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

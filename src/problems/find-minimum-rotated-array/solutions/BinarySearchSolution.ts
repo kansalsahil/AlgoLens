@@ -25,6 +25,51 @@ export const BinarySearchSolution: Solution<FindMinimumRotatedArrayInput, number
 
   return nums[left];
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  int left = 0;                                         // Line 2
+  int right = nums.length - 1;                          // Line 3
+                                                        // Line 4
+  while (left < right) {                                // Line 5
+    int mid = (left + right) / 2;                       // Line 6
+                                                        // Line 7
+    if (nums[mid] > nums[right]) {                      // Line 8
+      // Minimum is in right half
+      left = mid + 1;                                   // Line 9
+    } else {                                            // Line 10
+      // Minimum is in left half (including mid)        // Line 11
+      right = mid;                                      // Line 12
+    }
+  }
+                                                        // Line 16
+  return nums[left];
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  int left = 0;                                         // Line 2
+  int right = nums.Length - 1;                          // Line 3
+                                                        // Line 4
+  while (left < right) {                                // Line 5
+    int mid = (left + right) / 2;                       // Line 6
+                                                        // Line 7
+    if (nums[mid] > nums[right]) {                      // Line 8
+      // Minimum is in right half
+      left = mid + 1;                                   // Line 9
+    } else {                                            // Line 10
+      // Minimum is in left half (including mid)        // Line 11
+      right = mid;                                      // Line 12
+    }
+  }
+                                                        // Line 16
+  return nums[left];
+}`,
+    },
+  ],
   execute: (input: FindMinimumRotatedArrayInput): SolutionExecution<number> => {
     const { nums } = input;
     const steps: AnimationStep[] = [];

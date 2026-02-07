@@ -33,6 +33,80 @@ export const BruteForceSolution: Solution<GroupAnagramsInput, string[][]> = {
 
   return result;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  boolean[] used = new boolean[strs.length];
+  List<List<String>> result = new ArrayList<>();
+
+  for (int i = 0; i < strs.length; i++) {
+    if (used[i]) continue;
+
+    List<String> group = new ArrayList<>();
+    group.add(strs[i]);
+    used[i] = true;
+    String sortedI = sortString(strs[i]);
+
+    for (int j = i + 1; j < strs.length; j++) {
+      if (used[j]) continue;
+
+      String sortedJ = sortString(strs[j]);
+      if (sortedI.equals(sortedJ)) {
+        group.add(strs[j]);
+        used[j] = true;
+      }
+    }
+
+    result.add(group);
+  }
+
+  return result;
+}
+
+private String sortString(String s) {
+  char[] chars = s.toCharArray();
+  Arrays.sort(chars);
+  return new String(chars);
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  bool[] used = new bool[strs.Length];
+  var result = new List<IList<string>>();
+
+  for (int i = 0; i < strs.Length; i++) {
+    if (used[i]) continue;
+
+    var group = new List<string> { strs[i] };
+    used[i] = true;
+    string sortedI = SortString(strs[i]);
+
+    for (int j = i + 1; j < strs.Length; j++) {
+      if (used[j]) continue;
+
+      string sortedJ = SortString(strs[j]);
+      if (sortedI == sortedJ) {
+        group.Add(strs[j]);
+        used[j] = true;
+      }
+    }
+
+    result.Add(group);
+  }
+
+  return result;
+}
+
+private string SortString(string s) {
+  char[] chars = s.ToCharArray();
+  Array.Sort(chars);
+  return new string(chars);
+}`,
+    },
+  ],
   execute: (input: GroupAnagramsInput): SolutionExecution<string[][]> => {
     const { strs } = input;
     const steps: AnimationStep[] = [];

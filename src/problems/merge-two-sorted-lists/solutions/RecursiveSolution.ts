@@ -21,6 +21,39 @@ export const RecursiveSolution: Solution<MergeTwoSortedListsInput, ListNode | nu
   }
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (list1 == null) return list2;                             // Line 2
+  if (list2 == null) return list1;                             // Line 3
+                                                                // Line 4
+  if (list1.val <= list2.val) {                                // Line 5
+    list1.next = mergeTwoLists(list1.next, list2);             // Line 6
+    return list1;                                               // Line 7
+  } else {                                                      // Line 8
+    list2.next = mergeTwoLists(list1, list2.next);             // Line 9
+    return list2;                                               // Line 10
+  }                                                             // Line 11
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (list1 == null) return list2;                             // Line 2
+  if (list2 == null) return list1;                             // Line 3
+                                                                // Line 4
+  if (list1.val <= list2.val) {                                // Line 5
+    list1.next = MergeTwoLists(list1.next, list2);             // Line 6
+    return list1;                                               // Line 7
+  } else {                                                      // Line 8
+    list2.next = MergeTwoLists(list1, list2.next);             // Line 9
+    return list2;                                               // Line 10
+  }                                                             // Line 11
+}`,
+    },
+  ],
+
   execute: (input: MergeTwoSortedListsInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

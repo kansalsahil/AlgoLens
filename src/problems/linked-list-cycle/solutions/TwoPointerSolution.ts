@@ -24,6 +24,45 @@ export const TwoPointerSolution: Solution<LinkedListCycleInput, boolean> = {
   return false;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  ListNode slow = head;                                 // Line 2
+  ListNode fast = head;
+                                                        // Line 4
+  while (fast != null && fast.next != null) {          // Line 5
+    slow = slow.next;                                   // Line 6
+    fast = fast.next.next;                              // Line 7
+                                                        // Line 8
+    if (slow == fast) {                                 // Line 9
+      return true;
+    }
+  }
+                                                        // Line 13
+  return false;                                         // Line 14
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  ListNode slow = head;                                 // Line 2
+  ListNode fast = head;
+                                                        // Line 4
+  while (fast != null && fast.next != null) {          // Line 5
+    slow = slow.next;                                   // Line 6
+    fast = fast.next.next;                              // Line 7
+                                                        // Line 8
+    if (slow == fast) {                                 // Line 9
+      return true;
+    }
+  }
+                                                        // Line 13
+  return false;                                         // Line 14
+}`,
+    },
+  ],
+
   execute: (input: LinkedListCycleInput): SolutionExecution<boolean> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

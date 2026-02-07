@@ -15,6 +15,31 @@ export const LinearSearchSolution: Solution<SearchRotatedArrayInput, number> = {
   }
   return -1;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  for (int i = 0; i < nums.length; i++) {  // Line 2
+    if (nums[i] == target) {                // Line 3
+      return i;                             // Line 4
+    }
+  }
+  return -1;                                // Line 7
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  for (int i = 0; i < nums.Length; i++) {  // Line 2
+    if (nums[i] == target) {                // Line 3
+      return i;                             // Line 4
+    }
+  }
+  return -1;                                // Line 7
+}`,
+    },
+  ],
   execute: (input: SearchRotatedArrayInput): SolutionExecution<number> => {
     const { nums, target } = input;
     const steps: AnimationStep[] = [];

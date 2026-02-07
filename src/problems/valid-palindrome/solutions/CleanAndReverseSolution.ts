@@ -16,6 +16,35 @@ export const CleanAndReverseSolution: Solution<ValidPalindromeInput, boolean> = 
 
   return cleaned === reversed;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  // Clean: lowercase and keep only alphanumeric
+  String cleaned = s.toLowerCase().replaceAll("[^a-z0-9]", "");
+
+  // Reverse and compare
+  String reversed = new StringBuilder(cleaned).reverse().toString();
+
+  return cleaned.equals(reversed);
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  // Clean: lowercase and keep only alphanumeric
+  string cleaned = Regex.Replace(s.ToLower(), "[^a-z0-9]", "");
+
+  // Reverse and compare
+  char[] arr = cleaned.ToCharArray();
+  Array.Reverse(arr);
+  string reversed = new string(arr);
+
+  return cleaned == reversed;
+}`,
+    },
+  ],
   execute: (input: ValidPalindromeInput): SolutionExecution<boolean> => {
     const { s } = input;
     const steps: AnimationStep[] = [];

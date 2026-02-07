@@ -30,6 +30,60 @@ export const StackSolution: Solution<ValidParenthesesInput, boolean> = {
 
   return stack.length === 0;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Stack<Character> stack = new Stack<>();
+  Map<Character, Character> map = new HashMap<>();
+  map.put(')', '(');
+  map.put(']', '[');
+  map.put('}', '{');
+
+  for (char c : s.toCharArray()) {
+    if (map.containsKey(c)) {
+      // Closing bracket
+      if (stack.isEmpty() || stack.peek() != map.get(c)) {
+        return false;
+      }
+      stack.pop();
+    } else {
+      // Opening bracket
+      stack.push(c);
+    }
+  }
+
+  return stack.isEmpty();
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  Stack<char> stack = new Stack<char>();
+  Dictionary<char, char> map = new Dictionary<char, char> {
+    {')', '('},
+    {']', '['},
+    {'}', '{'}
+  };
+
+  foreach (char c in s) {
+    if (map.ContainsKey(c)) {
+      // Closing bracket
+      if (stack.Count == 0 || stack.Peek() != map[c]) {
+        return false;
+      }
+      stack.Pop();
+    } else {
+      // Opening bracket
+      stack.Push(c);
+    }
+  }
+
+  return stack.Count == 0;
+}`,
+    },
+  ],
   execute: (input: ValidParenthesesInput): SolutionExecution<boolean> => {
     const { s } = input;
     const steps: AnimationStep[] = [];

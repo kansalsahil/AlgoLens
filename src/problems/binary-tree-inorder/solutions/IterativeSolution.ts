@@ -27,6 +27,51 @@ export const IterativeSolution: Solution<BinaryTreeInorderInput, number[]> = {
   return result;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  List<Integer> result = new ArrayList<>();             // Line 2
+  Stack<TreeNode> stack = new Stack<>();
+  TreeNode curr = root;
+                                                        // Line 5
+  while (curr != null || !stack.isEmpty()) {            // Line 6
+    while (curr != null) {
+      stack.push(curr);
+      curr = curr.left;
+    }
+                                                        // Line 11
+    curr = stack.pop();                                 // Line 12
+    result.add(curr.val);
+    curr = curr.right;
+  }
+                                                        // Line 16
+  return result;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  List<int> result = new List<int>();                   // Line 2
+  Stack<TreeNode> stack = new Stack<TreeNode>();
+  TreeNode curr = root;
+                                                        // Line 5
+  while (curr != null || stack.Count > 0) {             // Line 6
+    while (curr != null) {
+      stack.Push(curr);
+      curr = curr.left;
+    }
+                                                        // Line 11
+    curr = stack.Pop();                                 // Line 12
+    result.Add(curr.val);
+    curr = curr.right;
+  }
+                                                        // Line 16
+  return result;
+}`,
+    },
+  ],
+
   execute: (input: BinaryTreeInorderInput): SolutionExecution<number[]> => {
     const { root } = input;
     const steps: AnimationStep[] = [];

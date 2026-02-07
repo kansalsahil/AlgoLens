@@ -30,6 +30,57 @@ export const OnePassSolution: Solution<RemoveNthNodeFromEndInput, ListNode | nul
   return dummy.next;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  ListNode dummy = new ListNode(0, head);               // Line 2
+  ListNode fast = dummy;
+  ListNode slow = dummy;
+                                                        // Line 5
+  // Move fast n+1 steps ahead                          // Line 6
+  for (int i = 0; i <= n; i++) {                        // Line 7
+    fast = fast.next;
+  }
+                                                        // Line 10
+  // Move both until fast reaches end                   // Line 11
+  while (fast != null) {                                // Line 12
+    fast = fast.next;
+    slow = slow.next;
+  }
+                                                        // Line 16
+  // Remove the node                                    // Line 17
+  slow.next = slow.next.next;                           // Line 18
+                                                        // Line 19
+  return dummy.next;                                    // Line 20
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  ListNode dummy = new ListNode(0, head);               // Line 2
+  ListNode fast = dummy;
+  ListNode slow = dummy;
+                                                        // Line 5
+  // Move fast n+1 steps ahead                          // Line 6
+  for (int i = 0; i <= n; i++) {                        // Line 7
+    fast = fast.next;
+  }
+                                                        // Line 10
+  // Move both until fast reaches end                   // Line 11
+  while (fast != null) {                                // Line 12
+    fast = fast.next;
+    slow = slow.next;
+  }
+                                                        // Line 16
+  // Remove the node                                    // Line 17
+  slow.next = slow.next.next;                           // Line 18
+                                                        // Line 19
+  return dummy.next;                                    // Line 20
+}`,
+    },
+  ],
+
   execute: (input: RemoveNthNodeFromEndInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

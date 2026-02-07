@@ -19,6 +19,39 @@ export const HashSetSolution: Solution<ContainsDuplicateInput, boolean> = {
 
   return false;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Set<Integer> seen = new HashSet<>();
+
+  for (int i = 0; i < nums.length; i++) {
+    if (seen.contains(nums[i])) {
+      return true;
+    }
+    seen.add(nums[i]);
+  }
+
+  return false;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  var seen = new HashSet<int>();
+
+  for (int i = 0; i < nums.Length; i++) {
+    if (seen.Contains(nums[i])) {
+      return true;
+    }
+    seen.Add(nums[i]);
+  }
+
+  return false;
+}`,
+    },
+  ],
   execute: (input: ContainsDuplicateInput): SolutionExecution<boolean> => {
     const { nums } = input;
     const steps: AnimationStep[] = [];

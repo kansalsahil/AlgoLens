@@ -18,6 +18,37 @@ export const LinearSearchSolution: Solution<FindMinimumRotatedArrayInput, number
 
   return min;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  int min = nums[0];                        // Line 2
+                                            // Line 3
+  for (int i = 1; i < nums.length; i++) {  // Line 4
+    if (nums[i] < min) {                    // Line 5
+      min = nums[i];
+    }
+  }
+                                            // Line 9
+  return min;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  int min = nums[0];                        // Line 2
+                                            // Line 3
+  for (int i = 1; i < nums.Length; i++) {  // Line 4
+    if (nums[i] < min) {                    // Line 5
+      min = nums[i];
+    }
+  }
+                                            // Line 9
+  return min;
+}`,
+    },
+  ],
   execute: (input: FindMinimumRotatedArrayInput): SolutionExecution<number> => {
     const { nums } = input;
     const steps: AnimationStep[] = [];

@@ -36,6 +36,69 @@ export const ArraySolution: Solution<ReorderListInput, void> = {
   nodes[left].next = null;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (head == null || head.next == null) return;       // Line 2
+                                                        // Line 3
+  // Store all nodes in array                          // Line 4
+  List<ListNode> nodes = new ArrayList<>();            // Line 5
+  ListNode current = head;                             // Line 6
+  while (current != null) {                             // Line 7
+    nodes.add(current);
+    current = current.next;
+  }
+                                                        // Line 11
+  // Reorder using two pointers                        // Line 12
+  int left = 0;                                         // Line 13
+  int right = nodes.size() - 1;
+                                                        // Line 15
+  while (left < right) {                                // Line 16
+    nodes.get(left).next = nodes.get(right);
+    left++;
+                                                        // Line 19
+    if (left >= right) break;                           // Line 20
+                                                        // Line 21
+    nodes.get(right).next = nodes.get(left);
+    right--;
+  }
+                                                        // Line 25
+  nodes.get(left).next = null;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (head == null || head.next == null) return;       // Line 2
+                                                        // Line 3
+  // Store all nodes in array                          // Line 4
+  List<ListNode> nodes = new List<ListNode>();         // Line 5
+  ListNode current = head;                             // Line 6
+  while (current != null) {                             // Line 7
+    nodes.Add(current);
+    current = current.next;
+  }
+                                                        // Line 11
+  // Reorder using two pointers                        // Line 12
+  int left = 0;                                         // Line 13
+  int right = nodes.Count - 1;
+                                                        // Line 15
+  while (left < right) {                                // Line 16
+    nodes[left].next = nodes[right];
+    left++;
+                                                        // Line 19
+    if (left >= right) break;                           // Line 20
+                                                        // Line 21
+    nodes[right].next = nodes[left];
+    right--;
+  }
+                                                        // Line 25
+  nodes[left].next = null;
+}`,
+    },
+  ],
+
   execute: (input: ReorderListInput): SolutionExecution<void> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

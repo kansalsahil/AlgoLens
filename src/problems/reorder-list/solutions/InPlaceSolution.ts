@@ -47,6 +47,91 @@ export const InPlaceSolution: Solution<ReorderListInput, void> = {
   }
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (head == null || head.next == null) return;       // Line 2
+                                                        // Line 3
+  // Step 1: Find middle                               // Line 4
+  ListNode slow = head;                                 // Line 5
+  ListNode fast = head;
+  while (fast.next != null && fast.next.next != null) { // Line 7
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+                                                        // Line 11
+  // Step 2: Reverse second half                       // Line 12
+  ListNode second = slow.next;                          // Line 13
+  slow.next = null;
+  ListNode prev = null;
+                                                        // Line 16
+  while (second != null) {                              // Line 17
+    ListNode temp = second.next;
+    second.next = prev;
+    prev = second;
+    second = temp;
+  }
+                                                        // Line 23
+  // Step 3: Merge two halves                          // Line 24
+  ListNode first = head;                                // Line 25
+  second = prev;
+                                                        // Line 27
+  while (second != null) {                              // Line 28
+    ListNode temp1 = first.next;
+    ListNode temp2 = second.next;
+
+    first.next = second;
+    second.next = temp1;
+
+    first = temp1;
+    second = temp2;
+  }
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (head == null || head.next == null) return;       // Line 2
+                                                        // Line 3
+  // Step 1: Find middle                               // Line 4
+  ListNode slow = head;                                 // Line 5
+  ListNode fast = head;
+  while (fast.next != null && fast.next.next != null) { // Line 7
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+                                                        // Line 11
+  // Step 2: Reverse second half                       // Line 12
+  ListNode second = slow.next;                          // Line 13
+  slow.next = null;
+  ListNode prev = null;
+                                                        // Line 16
+  while (second != null) {                              // Line 17
+    ListNode temp = second.next;
+    second.next = prev;
+    prev = second;
+    second = temp;
+  }
+                                                        // Line 23
+  // Step 3: Merge two halves                          // Line 24
+  ListNode first = head;                                // Line 25
+  second = prev;
+                                                        // Line 27
+  while (second != null) {                              // Line 28
+    ListNode temp1 = first.next;
+    ListNode temp2 = second.next;
+
+    first.next = second;
+    second.next = temp1;
+
+    first = temp1;
+    second = temp2;
+  }
+}`,
+    },
+  ],
+
   execute: (input: ReorderListInput): SolutionExecution<void> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

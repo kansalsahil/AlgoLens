@@ -23,6 +23,43 @@ export const IterativeSolution: Solution<ReverseLinkedListInput, ListNode | null
   return prev;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  ListNode prev = null;                     // Line 2
+  ListNode curr = head;
+  ListNode next = null;
+                                            // Line 5
+  while (curr != null) {                    // Line 6
+    next = curr.next;                       // Line 7
+    curr.next = prev;                       // Line 8
+    prev = curr;                            // Line 9
+    curr = next;                            // Line 10
+  }
+                                            // Line 12
+  return prev;                              // Line 13
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  ListNode prev = null;                     // Line 2
+  ListNode curr = head;
+  ListNode next = null;
+                                            // Line 5
+  while (curr != null) {                    // Line 6
+    next = curr.next;                       // Line 7
+    curr.next = prev;                       // Line 8
+    prev = curr;                            // Line 9
+    curr = next;                            // Line 10
+  }
+                                            // Line 12
+  return prev;                              // Line 13
+}`,
+    },
+  ],
+
   execute: (input: ReverseLinkedListInput): SolutionExecution<ListNode | null> => {
     const { head } = input;
     const steps: AnimationStep[] = [];

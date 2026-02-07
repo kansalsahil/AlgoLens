@@ -38,6 +38,77 @@ export const BinarySearchSolution: Solution<SearchRotatedArrayInput, number> = {
 
   return -1;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  int left = 0;                                                 // Line 2
+  int right = nums.length - 1;                                  // Line 3
+                                                                // Line 4
+  while (left <= right) {                                       // Line 5
+    int mid = (left + right) / 2;                               // Line 6
+                                                                // Line 7
+    if (nums[mid] == target) {                                  // Line 8
+      return mid;                                               // Line 9
+    }
+                                                                // Line 11
+    // Determine which half is sorted                           // Line 12
+    if (nums[left] <= nums[mid]) {                              // Line 13
+      // Left half is sorted                                    // Line 14
+      if (nums[left] <= target && target < nums[mid]) {         // Line 15
+        right = mid - 1;
+      } else {                                                  // Line 17
+        left = mid + 1;
+      }
+    } else {                                                    // Line 20
+      // Right half is sorted                                   // Line 21
+      if (nums[mid] < target && target <= nums[right]) {        // Line 22
+        left = mid + 1;
+      } else {                                                  // Line 24
+        right = mid - 1;
+      }
+    }
+  }
+                                                                // Line 29
+  return -1;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  int left = 0;                                                 // Line 2
+  int right = nums.Length - 1;                                  // Line 3
+                                                                // Line 4
+  while (left <= right) {                                       // Line 5
+    int mid = (left + right) / 2;                               // Line 6
+                                                                // Line 7
+    if (nums[mid] == target) {                                  // Line 8
+      return mid;                                               // Line 9
+    }
+                                                                // Line 11
+    // Determine which half is sorted                           // Line 12
+    if (nums[left] <= nums[mid]) {                              // Line 13
+      // Left half is sorted                                    // Line 14
+      if (nums[left] <= target && target < nums[mid]) {         // Line 15
+        right = mid - 1;
+      } else {                                                  // Line 17
+        left = mid + 1;
+      }
+    } else {                                                    // Line 20
+      // Right half is sorted                                   // Line 21
+      if (nums[mid] < target && target <= nums[right]) {        // Line 22
+        left = mid + 1;
+      } else {                                                  // Line 24
+        right = mid - 1;
+      }
+    }
+  }
+                                                                // Line 29
+  return -1;
+}`,
+    },
+  ],
   execute: (input: SearchRotatedArrayInput): SolutionExecution<number> => {
     const { nums, target } = input;
     const steps: AnimationStep[] = [];

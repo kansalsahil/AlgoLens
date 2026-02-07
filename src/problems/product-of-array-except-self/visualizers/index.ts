@@ -1,0 +1,1 @@
+export { ProductArrayVisualizer } from './ProductArrayVisualizer';

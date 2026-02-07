@@ -23,6 +23,43 @@ export const RecursiveSolution: Solution<BinaryTreeInorderInput, number[]> = {
   return result;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  List<Integer> result = new ArrayList<>();             // Line 2
+                                                        // Line 3
+  void traverse(TreeNode node) {                        // Line 4
+    if (node == null) return;                           // Line 5
+                                                        // Line 6
+    traverse(node.left);                                // Line 7
+    result.add(node.val);                               // Line 8
+    traverse(node.right);                               // Line 9
+  }
+                                                        // Line 11
+  traverse(root);                                       // Line 12
+  return result;                                        // Line 13
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  List<int> result = new List<int>();                   // Line 2
+                                                        // Line 3
+  void Traverse(TreeNode node) {                        // Line 4
+    if (node == null) return;                           // Line 5
+                                                        // Line 6
+    Traverse(node.left);                                // Line 7
+    result.Add(node.val);                               // Line 8
+    Traverse(node.right);                               // Line 9
+  }
+                                                        // Line 11
+  Traverse(root);                                       // Line 12
+  return result;                                        // Line 13
+}`,
+    },
+  ],
+
   execute: (input: BinaryTreeInorderInput): SolutionExecution<number[]> => {
     const { root } = input;
     const steps: AnimationStep[] = [];

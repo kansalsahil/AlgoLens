@@ -23,6 +23,43 @@ export const HashSetSolution: Solution<LinkedListCycleInput, boolean> = {
   return false;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Set<ListNode> visited = new HashSet<>();             // Line 2
+  ListNode current = head;
+                                                        // Line 4
+  while (current != null) {                             // Line 5
+    if (visited.contains(current)) {
+      return true;
+    }
+    visited.add(current);
+    current = current.next;
+  }
+                                                        // Line 12
+  return false;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  HashSet<ListNode> visited = new HashSet<ListNode>();  // Line 2
+  ListNode current = head;
+                                                        // Line 4
+  while (current != null) {                             // Line 5
+    if (visited.Contains(current)) {
+      return true;
+    }
+    visited.Add(current);
+    current = current.next;
+  }
+                                                        // Line 12
+  return false;
+}`,
+    },
+  ],
+
   execute: (input: LinkedListCycleInput): SolutionExecution<boolean> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

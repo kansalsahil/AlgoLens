@@ -21,6 +21,47 @@ export const HashMapSolution: Solution<GroupAnagramsInput, string[][]> = {
 
   return Array.from(map.values());
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Map<String, List<String>> map = new HashMap<>();
+
+  for (String str : strs) {
+    char[] chars = str.toCharArray();
+    Arrays.sort(chars);
+    String sorted = new String(chars);
+
+    if (!map.containsKey(sorted)) {
+      map.put(sorted, new ArrayList<>());
+    }
+    map.get(sorted).add(str);
+  }
+
+  return new ArrayList<>(map.values());
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  var map = new Dictionary<string, List<string>>();
+
+  foreach (string str in strs) {
+    char[] chars = str.ToCharArray();
+    Array.Sort(chars);
+    string sorted = new string(chars);
+
+    if (!map.ContainsKey(sorted)) {
+      map[sorted] = new List<string>();
+    }
+    map[sorted].Add(str);
+  }
+
+  return map.Values.Select(v => (IList<string>)v).ToList();
+}`,
+    },
+  ],
   execute: (input: GroupAnagramsInput): SolutionExecution<string[][]> => {
     const { strs } = input;
     const steps: AnimationStep[] = [];

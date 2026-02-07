@@ -44,6 +44,85 @@ function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | nul
   return dummy.next;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (lists.length == 0) return null;                  // Line 2
+  if (lists.length == 1) return lists[0];              // Line 3
+                                                        // Line 4
+  return mergeHelper(lists, 0, lists.length - 1);      // Line 5
+}                                                       // Line 6
+                                                        // Line 7
+ListNode mergeHelper(ListNode[] lists, int start, int end) { // Line 8
+  if (start == end) return lists[start];
+
+  int mid = (start + end) / 2;
+  ListNode left = mergeHelper(lists, start, mid);
+  ListNode right = mergeHelper(lists, mid + 1, end);
+                                                        // Line 14
+  return mergeTwoLists(left, right);
+}
+
+ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+  ListNode dummy = new ListNode(0);
+  ListNode current = dummy;
+
+  while (l1 != null && l2 != null) {
+    if (l1.val <= l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
+    }
+    current = current.next;
+  }
+
+  current.next = l1 != null ? l1 : l2;
+  return dummy.next;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (lists.Length == 0) return null;                  // Line 2
+  if (lists.Length == 1) return lists[0];              // Line 3
+                                                        // Line 4
+  return MergeHelper(lists, 0, lists.Length - 1);      // Line 5
+}                                                       // Line 6
+                                                        // Line 7
+ListNode MergeHelper(ListNode[] lists, int start, int end) { // Line 8
+  if (start == end) return lists[start];
+
+  int mid = (start + end) / 2;
+  ListNode left = MergeHelper(lists, start, mid);
+  ListNode right = MergeHelper(lists, mid + 1, end);
+                                                        // Line 14
+  return MergeTwoLists(left, right);
+}
+
+ListNode MergeTwoLists(ListNode l1, ListNode l2) {
+  ListNode dummy = new ListNode(0);
+  ListNode current = dummy;
+
+  while (l1 != null && l2 != null) {
+    if (l1.val <= l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
+    }
+    current = current.next;
+  }
+
+  current.next = l1 != null ? l1 : l2;
+  return dummy.next;
+}`,
+    },
+  ],
+
   execute: (input: MergeKSortedListsInput): SolutionExecution<ListNode | null> => {
     const steps: AnimationStep[] = [];
     let stepId = 0;

@@ -300,6 +300,7 @@ export function ProblemPage() {
                 <CodeDisplay
                   code={currentSolution.code}
                   highlightedLine={currentStep?.lineNumber}
+                  codeLanguages={currentSolution.codeLanguages}
                 />
               </div>
             </div>

@@ -41,6 +41,83 @@ export const TwoPointerSolution: Solution<ThreeSumInput, number[][]> = {
 
   return result;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Arrays.sort(nums);                                      // Line 2
+  List<List<Integer>> result = new ArrayList<>();        // Line 3
+                                                          // Line 4
+  for (int i = 0; i < nums.length - 2; i++) {            // Line 5
+    // Skip duplicates for i                             // Line 6
+    if (i > 0 && nums[i] == nums[i - 1]) continue;       // Line 7
+                                                          // Line 8
+    int left = i + 1;                                     // Line 9
+    int right = nums.length - 1;                          // Line 10
+                                                          // Line 11
+    while (left < right) {                                // Line 12
+      int sum = nums[i] + nums[left] + nums[right];      // Line 13
+                                                          // Line 14
+      if (sum == 0) {                                     // Line 15
+        result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                                                          // Line 17
+        // Skip duplicates for left                       // Line 18
+        while (left < right && nums[left] == nums[left + 1]) left++;
+        // Skip duplicates for right                      // Line 20
+        while (left < right && nums[right] == nums[right - 1]) right--;
+                                                          // Line 22
+        left++;                                           // Line 23
+        right--;                                          // Line 24
+      } else if (sum < 0) {                               // Line 25
+        left++;                                           // Line 26
+      } else {                                            // Line 27
+        right--;                                          // Line 28
+      }
+    }
+  }
+                                                          // Line 32
+  return result;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  Array.Sort(nums);                                       // Line 2
+  var result = new List<IList<int>>();                    // Line 3
+                                                          // Line 4
+  for (int i = 0; i < nums.Length - 2; i++) {            // Line 5
+    // Skip duplicates for i                             // Line 6
+    if (i > 0 && nums[i] == nums[i - 1]) continue;       // Line 7
+                                                          // Line 8
+    int left = i + 1;                                     // Line 9
+    int right = nums.Length - 1;                          // Line 10
+                                                          // Line 11
+    while (left < right) {                                // Line 12
+      int sum = nums[i] + nums[left] + nums[right];      // Line 13
+                                                          // Line 14
+      if (sum == 0) {                                     // Line 15
+        result.Add(new List<int> { nums[i], nums[left], nums[right] });
+                                                          // Line 17
+        // Skip duplicates for left                       // Line 18
+        while (left < right && nums[left] == nums[left + 1]) left++;
+        // Skip duplicates for right                      // Line 20
+        while (left < right && nums[right] == nums[right - 1]) right--;
+                                                          // Line 22
+        left++;                                           // Line 23
+        right--;                                          // Line 24
+      } else if (sum < 0) {                               // Line 25
+        left++;                                           // Line 26
+      } else {                                            // Line 27
+        right--;                                          // Line 28
+      }
+    }
+  }
+                                                          // Line 32
+  return result;
+}`,
+    },
+  ],
   execute: (input: ThreeSumInput): SolutionExecution<number[][]> => {
     const { nums: originalNums } = input;
     const nums = [...originalNums].sort((a, b) => a - b);

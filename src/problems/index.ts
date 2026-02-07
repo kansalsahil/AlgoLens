@@ -15,3 +15,5 @@ import './linked-list-cycle';
 import './reorder-list';
 import './remove-nth-node-from-end';
 import './merge-k-sorted-lists';
+import './product-of-array-except-self';
+import './number-of-islands';

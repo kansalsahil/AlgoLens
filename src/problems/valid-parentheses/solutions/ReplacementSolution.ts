@@ -20,6 +20,41 @@ export const ReplacementSolution: Solution<ValidParenthesesInput, boolean> = {
 
   return true;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  while (s.length() > 0) {
+    String prev = s;
+    s = s.replace("()", "").replace("[]", "").replace("{}", "");
+
+    if (s.equals(prev)) {
+      // No replacements made
+      return false;
+    }
+  }
+
+  return true;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  while (s.Length > 0) {
+    string prev = s;
+    s = s.Replace("()", "").Replace("[]", "").Replace("{}", "");
+
+    if (s == prev) {
+      // No replacements made
+      return false;
+    }
+  }
+
+  return true;
+}`,
+    },
+  ],
   execute: (input: ValidParenthesesInput): SolutionExecution<boolean> => {
     const { s: original } = input;
     const steps: AnimationStep[] = [];

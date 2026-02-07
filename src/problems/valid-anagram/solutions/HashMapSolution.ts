@@ -30,6 +30,61 @@ export const HashMapSolution: Solution<ValidAnagramInput, boolean> = {
 
   return charCount.size === 0;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (s.length() != t.length()) return false;
+
+  Map<Character, Integer> charCount = new HashMap<>();
+
+  // Count characters in s
+  for (char c : s.toCharArray()) {
+    charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+  }
+
+  // Decrement counts for characters in t
+  for (char c : t.toCharArray()) {
+    if (!charCount.containsKey(c)) return false;
+    int count = charCount.get(c) - 1;
+    if (count == 0) {
+      charCount.remove(c);
+    } else {
+      charCount.put(c, count);
+    }
+  }
+
+  return charCount.isEmpty();
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (s.Length != t.Length) return false;
+
+  var charCount = new Dictionary<char, int>();
+
+  // Count characters in s
+  foreach (char c in s) {
+    charCount[c] = charCount.ContainsKey(c) ? charCount[c] + 1 : 1;
+  }
+
+  // Decrement counts for characters in t
+  foreach (char c in t) {
+    if (!charCount.ContainsKey(c)) return false;
+    int count = charCount[c] - 1;
+    if (count == 0) {
+      charCount.Remove(c);
+    } else {
+      charCount[c] = count;
+    }
+  }
+
+  return charCount.Count == 0;
+}`,
+    },
+  ],
   execute: (input: ValidAnagramInput): SolutionExecution<boolean> => {
     const { s, t } = input;
     const steps: AnimationStep[] = [];

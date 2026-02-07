@@ -28,6 +28,78 @@ export const BruteForceSolution: Solution<ThreeSumInput, number[][]> = {
 
   return result;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  List<List<Integer>> result = new ArrayList<>();      // Line 2
+  int n = nums.length;
+                                                        // Line 4
+  for (int i = 0; i < n - 2; i++) {                    // Line 5
+    for (int j = i + 1; j < n - 1; j++) {              // Line 6
+      for (int k = j + 1; k < n; k++) {                // Line 7
+        if (nums[i] + nums[j] + nums[k] == 0) {        // Line 8
+          List<Integer> triplet = Arrays.asList(nums[i], nums[j], nums[k]);
+          Collections.sort(triplet);
+                                                        // Line 11
+          // Check for duplicates
+          boolean exists = false;
+          for (List<Integer> t : result) {
+            if (t.get(0).equals(triplet.get(0)) &&
+                t.get(1).equals(triplet.get(1)) &&
+                t.get(2).equals(triplet.get(2))) {
+              exists = true;
+              break;
+            }
+          }
+          if (!exists) {
+            result.add(triplet);                        // Line 12
+          }
+        }
+      }
+    }
+  }
+                                                        // Line 19
+  return result;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  var result = new List<IList<int>>();                 // Line 2
+  int n = nums.Length;
+                                                        // Line 4
+  for (int i = 0; i < n - 2; i++) {                    // Line 5
+    for (int j = i + 1; j < n - 1; j++) {              // Line 6
+      for (int k = j + 1; k < n; k++) {                // Line 7
+        if (nums[i] + nums[j] + nums[k] == 0) {        // Line 8
+          var triplet = new List<int> { nums[i], nums[j], nums[k] };
+          triplet.Sort();
+                                                        // Line 11
+          // Check for duplicates
+          bool exists = false;
+          foreach (var t in result) {
+            if (t[0] == triplet[0] &&
+                t[1] == triplet[1] &&
+                t[2] == triplet[2]) {
+              exists = true;
+              break;
+            }
+          }
+          if (!exists) {
+            result.Add(triplet);                        // Line 12
+          }
+        }
+      }
+    }
+  }
+                                                        // Line 19
+  return result;
+}`,
+    },
+  ],
+
   execute: (input: ThreeSumInput): SolutionExecution<number[][]> => {
     const { nums } = input;
     const steps: AnimationStep[] = [];

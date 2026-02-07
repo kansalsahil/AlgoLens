@@ -37,6 +37,67 @@ export const TwoPointerSolution: Solution<ValidPalindromeInput, boolean> = {
 function isAlphanumeric(char: string): boolean {
   return /[a-z0-9]/i.test(char);
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  int left = 0;
+  int right = s.length() - 1;
+
+  while (left < right) {
+    // Skip non-alphanumeric from left
+    while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+      left++;
+    }
+
+    // Skip non-alphanumeric from right
+    while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+      right--;
+    }
+
+    // Compare characters (case-insensitive)
+    if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  int left = 0;
+  int right = s.Length - 1;
+
+  while (left < right) {
+    // Skip non-alphanumeric from left
+    while (left < right && !char.IsLetterOrDigit(s[left])) {
+      left++;
+    }
+
+    // Skip non-alphanumeric from right
+    while (left < right && !char.IsLetterOrDigit(s[right])) {
+      right--;
+    }
+
+    // Compare characters (case-insensitive)
+    if (char.ToLower(s[left]) != char.ToLower(s[right])) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+}`,
+    },
+  ],
   execute: (input: ValidPalindromeInput): SolutionExecution<boolean> => {
     const { s } = input;
     const steps: AnimationStep[] = [];

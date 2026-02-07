@@ -20,6 +20,37 @@ export const RecursiveSolution: Solution<ReverseLinkedListInput, ListNode | null
   return newHead;
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (head == null || head.next == null) {          // Line 2
+    return head;
+  }
+                                                    // Line 5
+  ListNode newHead = reverseList(head.next);        // Line 6
+  head.next.next = head;                            // Line 7
+  head.next = null;                                 // Line 8
+                                                    // Line 9
+  return newHead;                                   // Line 10
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (head == null || head.next == null) {          // Line 2
+    return head;
+  }
+                                                    // Line 5
+  ListNode newHead = ReverseList(head.next);        // Line 6
+  head.next.next = head;                            // Line 7
+  head.next = null;                                 // Line 8
+                                                    // Line 9
+  return newHead;                                   // Line 10
+}`,
+    },
+  ],
+
   execute: (input: ReverseLinkedListInput): SolutionExecution<ListNode | null> => {
     const { head } = input;
     const steps: AnimationStep[] = [];

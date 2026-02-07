@@ -15,6 +15,35 @@ export const SortingSolution: Solution<ValidAnagramInput, boolean> = {
 
   return sortedS === sortedT;
 }`,
+
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  if (s.length() != t.length()) return false;
+
+  char[] sChars = s.toCharArray();
+  char[] tChars = t.toCharArray();
+  Arrays.sort(sChars);
+  Arrays.sort(tChars);
+
+  return Arrays.equals(sChars, tChars);
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  if (s.Length != t.Length) return false;
+
+  char[] sChars = s.ToCharArray();
+  char[] tChars = t.ToCharArray();
+  Array.Sort(sChars);
+  Array.Sort(tChars);
+
+  return new string(sChars) == new string(tChars);
+}`,
+    },
+  ],
   execute: (input: ValidAnagramInput): SolutionExecution<boolean> => {
     const { s, t } = input;
     const steps: AnimationStep[] = [];

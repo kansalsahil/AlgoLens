@@ -24,6 +24,45 @@ export const HashMapSolution: Solution<TwoSumInput, number[]> = {
   return [];
 }`,
 
+  codeLanguages: [
+    {
+      language: 'java',
+      code: `class Solution {
+  Map<Integer, Integer> map = new HashMap<>();
+
+  for (int i = 0; i < nums.length; i++) {
+    int complement = target - nums[i];
+
+    if (map.containsKey(complement)) {
+      return new int[] { map.get(complement), i };
+    }
+
+    map.put(nums[i], i);
+  }
+
+  return new int[] {};
+}`,
+    },
+    {
+      language: 'csharp',
+      code: `public class Solution {
+  var map = new Dictionary<int, int>();
+
+  for (int i = 0; i < nums.Length; i++) {
+    int complement = target - nums[i];
+
+    if (map.ContainsKey(complement)) {
+      return new int[] { map[complement], i };
+    }
+
+    map[nums[i]] = i;
+  }
+
+  return new int[] { };
+}`,
+    },
+  ],
+
   execute: (input: TwoSumInput): SolutionExecution<number[]> => {
     const { nums, target } = input;
     const steps: AnimationStep[] = [];
