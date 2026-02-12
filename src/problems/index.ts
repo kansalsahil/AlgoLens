@@ -18,3 +18,8 @@ import './merge-k-sorted-lists';
 import './product-of-array-except-self';
 import './number-of-islands';
 import './best-time-to-buy-sell-stock';
+import './maximum-depth-binary-tree';
+import './longest-substring-without-repeating';
+import './container-with-most-water';
+import './maximum-subarray';
+import './climbing-stairs';
