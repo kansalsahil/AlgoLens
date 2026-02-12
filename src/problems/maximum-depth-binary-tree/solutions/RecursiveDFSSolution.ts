@@ -76,7 +76,7 @@ export const RecursiveDFSSolution: Solution<MaximumDepthBinaryTreeInput, number>
       }],
       stack: [...callStack],
       custom: {
-        maxDepth: maxDepthFound,
+        depth: maxDepthFound,
         nodeDepths: Object.fromEntries(nodeDepths),
         ...customData,
       },
@@ -89,14 +89,14 @@ export const RecursiveDFSSolution: Solution<MaximumDepthBinaryTreeInput, number>
       description: 'Starting recursive DFS to find maximum depth',
       lineNumber: 2,
       visualizationData: createVisualizationData(),
-      variables: { maxDepth: 0 },
+      variables: { depth: 0 },
     });
 
     const maxDepth = (node: TreeNode | null, depth: number): number => {
       // Push current call to stack
       callStack.push({
         functionName: 'maxDepth',
-        parameters: { node: node === null ? 'null' : node.value, depth },
+        parameters: { node: node === null ? 'null' : node.value },
         lineNumber: 2,
       });
 
@@ -200,7 +200,7 @@ export const RecursiveDFSSolution: Solution<MaximumDepthBinaryTreeInput, number>
       // Calculate current node's depth
       const currentDepth = 1 + Math.max(leftDepth, rightDepth);
       nodeDepths.set(node.id, currentDepth);
-      maxDepthFound = Math.max(maxDepthFound, depth);
+      maxDepthFound = Math.max(maxDepthFound, currentDepth);
 
       steps.push({
         id: `step-${stepId++}`,
@@ -240,7 +240,7 @@ export const RecursiveDFSSolution: Solution<MaximumDepthBinaryTreeInput, number>
         }],
         stack: [],
         custom: {
-          maxDepth: result,
+          depth: result,
           nodeDepths: Object.fromEntries(nodeDepths),
           complete: true,
         },

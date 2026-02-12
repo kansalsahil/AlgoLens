@@ -11,9 +11,9 @@ export const CLIMBING_STAIRS_METADATA = {
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?`,
   examples: [
     {
-      input: { n: 2 },
-      output: 2,
-      explanation: 'There are two ways to climb to the top:\n1. 1 step + 1 step\n2. 2 steps',
+      input: { n: 4 },
+      output: 5,
+      explanation: 'There are five ways to climb to the top:\n1. 1+1+1+1\n2. 1+1+2\n3. 1+2+1\n4. 2+1+1\n5. 2+2',
     },
     {
       input: { n: 3 },

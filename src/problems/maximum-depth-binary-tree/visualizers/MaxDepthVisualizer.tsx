@@ -417,17 +417,7 @@ export function MaxDepthVisualizer({ step, transitionDuration }: VisualizationPr
               </div>
             )}
 
-            {/* Recursion Depth Info (DFS) */}
-            {isRecursive && stack && stack.length > 0 && (
-              <div className="col-span-2 space-y-1">
-                <div className="text-sm font-medium" style={{ color: theme.colors.textSecondary }}>
-                  Call Stack Depth
-                </div>
-                <div className="text-xl font-semibold" style={{ color: theme.colors.text }}>
-                  {stack.length}
-                </div>
-              </div>
-            )}
+            {/* Recursion Depth Info - Hidden per user request */}
           </div>
         </div>
       </div>
