@@ -505,7 +505,7 @@ export function HouseRobberVisualizer({ step }: VisualizationProps) {
           </div>
         </div>
 
-        {/* DP Formula Explanation */}
+        {/* Formula Explanation - Conditional based on solution type */}
         <div
           className="rounded-xl p-6"
           style={{
@@ -513,26 +513,107 @@ export function HouseRobberVisualizer({ step }: VisualizationProps) {
             border: `2px solid ${theme.colors.border}`,
           }}
         >
-          <div className="text-sm font-medium mb-3" style={{ color: theme.colors.textSecondary }}>
-            Dynamic Programming Recurrence
-          </div>
-          <div
-            className="p-4 rounded-lg font-mono text-center"
-            style={{
-              backgroundColor: theme.colors.background,
-              border: `2px solid ${theme.colors.border}`,
-              color: theme.colors.text,
-            }}
-          >
-            dp[i] = max(dp[i-1], dp[i-2] + nums[i])
-          </div>
-          <div className="text-xs mt-3 space-y-1" style={{ color: theme.colors.textSecondary }}>
-            <div><strong>dp[i-1]:</strong> Skip current house, take max from previous houses</div>
-            <div><strong>dp[i-2] + nums[i]:</strong> Rob current house, add to max from i-2 (can't rob adjacent)</div>
-            <div className="pt-2 border-t mt-2" style={{ borderColor: theme.colors.border }}>
-              💡 At each house, choose the option that gives more money!
-            </div>
-          </div>
+          {variables ? (
+            // Space Optimized Solution
+            <>
+              <div className="text-sm font-medium mb-3" style={{ color: theme.colors.textSecondary }}>
+                Space-Optimized DP (O(1) Space)
+              </div>
+              <div
+                className="p-4 rounded-lg font-mono text-center"
+                style={{
+                  backgroundColor: theme.colors.background,
+                  border: `2px solid ${theme.colors.border}`,
+                  color: theme.colors.text,
+                }}
+              >
+                current = max(prev1, prev2 + nums[i])
+              </div>
+              <div className="text-xs mt-3 space-y-1" style={{ color: theme.colors.textSecondary }}>
+                <div><strong>prev1:</strong> Max money from previous house (skip current)</div>
+                <div><strong>prev2 + nums[i]:</strong> Rob current house, add to max from i-2</div>
+                <div className="pt-2 border-t mt-2" style={{ borderColor: theme.colors.border }}>
+                  💡 Only keep track of last 2 values instead of entire array!
+                </div>
+              </div>
+            </>
+          ) : dp && !memo ? (
+            // Tabulation Solution
+            <>
+              <div className="text-sm font-medium mb-3" style={{ color: theme.colors.textSecondary }}>
+                Bottom-Up Dynamic Programming
+              </div>
+              <div
+                className="p-4 rounded-lg font-mono text-center"
+                style={{
+                  backgroundColor: theme.colors.background,
+                  border: `2px solid ${theme.colors.border}`,
+                  color: theme.colors.text,
+                }}
+              >
+                dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+              </div>
+              <div className="text-xs mt-3 space-y-1" style={{ color: theme.colors.textSecondary }}>
+                <div><strong>dp[i-1]:</strong> Skip current house, take max from previous houses</div>
+                <div><strong>dp[i-2] + nums[i]:</strong> Rob current house, add to max from i-2 (can't rob adjacent)</div>
+                <div className="pt-2 border-t mt-2" style={{ borderColor: theme.colors.border }}>
+                  💡 Build solution from smaller subproblems (house 0 → house n)
+                </div>
+              </div>
+            </>
+          ) : memo ? (
+            // Memoization Solution
+            <>
+              <div className="text-sm font-medium mb-3" style={{ color: theme.colors.textSecondary }}>
+                Top-Down DP with Memoization
+              </div>
+              <div
+                className="p-4 rounded-lg font-mono text-center text-base"
+                style={{
+                  backgroundColor: theme.colors.background,
+                  border: `2px solid ${theme.colors.border}`,
+                  color: theme.colors.text,
+                }}
+              >
+                rob(i) = max(rob(i+1), nums[i] + rob(i+2))
+                <br />
+                <span className="text-sm text-green-500">+ Cache[i]</span>
+              </div>
+              <div className="text-xs mt-3 space-y-1" style={{ color: theme.colors.textSecondary }}>
+                <div><strong>Same recursive formula</strong> but with caching!</div>
+                <div><strong>rob(i+1):</strong> Skip current house, rob from next house</div>
+                <div><strong>nums[i] + rob(i+2):</strong> Rob current house, skip next (can't rob adjacent)</div>
+                <div className="pt-2 border-t mt-2" style={{ borderColor: theme.colors.border }}>
+                  💡 Store results in cache - each subproblem computed only once → O(n) time
+                </div>
+              </div>
+            </>
+          ) : (
+            // Recursive Solution
+            <>
+              <div className="text-sm font-medium mb-3" style={{ color: theme.colors.textSecondary }}>
+                Recursive Relation (Brute Force)
+              </div>
+              <div
+                className="p-4 rounded-lg font-mono text-center"
+                style={{
+                  backgroundColor: theme.colors.background,
+                  border: `2px solid ${theme.colors.border}`,
+                  color: theme.colors.text,
+                }}
+              >
+                rob(i) = max(rob(i+1), nums[i] + rob(i+2))
+              </div>
+              <div className="text-xs mt-3 space-y-1" style={{ color: theme.colors.textSecondary }}>
+                <div><strong>Top-Down Recursion:</strong> Start from house 0, explore all possibilities</div>
+                <div><strong>rob(i+1):</strong> Skip current house, rob from next house</div>
+                <div><strong>nums[i] + rob(i+2):</strong> Rob current house, skip next (can't rob adjacent)</div>
+                <div className="pt-2 border-t mt-2" style={{ borderColor: theme.colors.border }}>
+                  ⚠️ O(2^n) time: recalculates same subproblems many times!
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
